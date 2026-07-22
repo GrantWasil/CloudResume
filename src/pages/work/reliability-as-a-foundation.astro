@@ -1,0 +1,60 @@
+---
+import EssayLayout from "../../layouts/EssayLayout.astro";
+---
+
+<EssayLayout
+  eyebrow="Operating foundation · Systems engineering"
+  number="03"
+  title="Reliability is part of the product"
+  description="Lessons from infrastructure, automation, and incident response that shape how Grant Wasil builds trustworthy AI systems."
+  intro="Before I worked in AI integration, I worked in systems where deployment, access, failure, and recovery were not abstractions. That experience still shapes every product decision I make."
+>
+  <section>
+    <h2>Trust is built operationally.</h2>
+    <p>
+      My systems background includes managing deployment cycles, migrating
+      infrastructure automation, improving runbooks and incident response, and
+      designing workflows that removed recurring operational toil. Earlier, in
+      election operations, I built automation for time-sensitive public systems
+      where clarity and dependable execution mattered deeply.
+    </p>
+    <p>
+      Those environments trained me to look past the happy path. Who owns the
+      system? What happens when an assumption fails? Can someone understand why
+      an action occurred? How do people recover without creating a second crisis?
+    </p>
+  </section>
+
+  <section class="essay-grid essay-grid--two">
+    <div>
+      <p class="section-kicker">From SRE</p>
+      <h3>Design for operation</h3>
+      <p>
+        A system is not finished when it works once. It needs observability,
+        understandable failure modes, ownership, and a path to recovery.
+      </p>
+    </div>
+    <div>
+      <p class="section-kicker">Into AI</p>
+      <h3>Design for judgment</h3>
+      <p>
+        AI adds uncertainty at the center of the product. Evaluation, escalation,
+        and human review must be part of the architecture—not post-launch policy.
+      </p>
+    </div>
+  </section>
+
+  <blockquote>
+    <p>If people cannot understand, evaluate, and recover from a system, they cannot responsibly rely on it.</p>
+  </blockquote>
+
+  <section>
+    <h2>Reliability enables adoption.</h2>
+    <p>
+      Responsible constraints are not the enemy of useful AI. They are what lets
+      an organization move beyond isolated experiments. When teams know how a
+      system is evaluated, where its authority ends, and what happens when it is
+      uncertain, they can use it with greater confidence and clearer judgment.
+    </p>
+  </section>
+</EssayLayout>

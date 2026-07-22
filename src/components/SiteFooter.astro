@@ -1,0 +1,33 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="connect">
+  <div class="site-footer__lead">
+    <p class="section-kicker">Let’s compare notes</p>
+    <h2>Working through the messy middle of AI implementation?</h2>
+  </div>
+  <div class="site-footer__action">
+    <p>
+      I’m always interested in conversations about organizational AI strategy,
+      adoption, reliable workflows, and agentic systems. Reach me directly at
+      <a href="mailto:dev@grantwasil.com">dev@grantwasil.com</a>.
+    </p>
+    <a class="text-link text-link--large" href="mailto:dev@grantwasil.com">
+      Start a conversation
+      <ArrowIcon />
+    </a>
+  </div>
+  <div class="site-footer__base">
+    <p>© {year} Grant Wasil</p>
+    <div class="site-footer__links">
+      <a href="https://www.linkedin.com/in/grant-wasil/" rel="me">LinkedIn</a>
+      <a href="https://github.com/GrantWasil" rel="me">GitHub</a>
+      <a href="https://x.com/GrantWasil" rel="me">X / Twitter</a>
+      <a href="mailto:dev@grantwasil.com">Email</a>
+    </div>
+    <p>Built in Colorado · Designed for useful conversations</p>
+  </div>
+</footer>

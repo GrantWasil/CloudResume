@@ -1,0 +1,40 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { href: "/#practice", label: "Practice" },
+  { href: "/#selected-work", label: "Work" },
+  { href: "/#about", label: "About" },
+];
+---
+
+<header class="site-header">
+  <a class="site-mark" href="/" aria-label="Grant Wasil, home">
+    <span class="site-mark__initials">GW</span>
+    <span class="site-mark__label">
+      <strong>Grant Wasil</strong>
+      <span>AI integration · strategy to system</span>
+    </span>
+  </a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <ul>
+      {navItems.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <a class="header-contact" href="/#connect">
+    Compare notes
+    <ArrowIcon />
+  </a>
+</header>
+
+{currentPath !== "/" && (
+  <div class="subpage-rail" aria-hidden="true">
+    <span>Grant Wasil</span>
+    <span>Littleton, Colorado</span>
+  </div>
+)}

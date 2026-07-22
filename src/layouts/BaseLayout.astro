@@ -1,0 +1,72 @@
+---
+import "@fontsource-variable/fraunces/wght.css";
+import "@fontsource-variable/public-sans/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Grant Wasil — AI Integration Engineer",
+  description = "I help organizations turn AI possibility into sound direction, stronger capability, and working systems.",
+  image = "/grant-wasil-1600.webp",
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = image ? new URL(image, Astro.site).toString() : undefined;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Grant Wasil",
+  url: "https://grantwasil.com",
+  jobTitle: "AI Integration Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Gary Community Ventures",
+    url: "https://garycommunity.org",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/grant-wasil/",
+    "https://github.com/GrantWasil",
+    "https://x.com/GrantWasil",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#17231c" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content="Portrait of Grant Wasil" />}
+    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SiteHeader />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
