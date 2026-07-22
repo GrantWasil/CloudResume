@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Least-privilege GitHub Actions deployment role for grantwasil.com.
+
+Parameters:
+  GitHubOwner:
+    Type: String
+    Default: GrantWasil
+    Description: GitHub account or organization that owns the repository.
+  GitHubRepository:
+    Type: String
+    Default: CloudResume
+    Description: GitHub repository allowed to assume the role.
+  GitHubEnvironment:
+    Type: String
+    Default: production
+    Description: Protected GitHub environment allowed to assume the role.
+  S3BucketName:
+    Type: String
+    Description: Existing S3 bucket that serves grantwasil.com.
+  CloudFrontDistributionId:
+    Type: String
+    Description: Existing CloudFront distribution to invalidate after upload.
+  RoleName:
+    Type: String
+    Default: grantwasil-com-github-deploy
+    Description: Name for the GitHub Actions deployment role.
+
+Resources:
+  DeploymentRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref RoleName
+      Description: Publishes the verified grantwasil.com static build from GitHub Actions.
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOwner}/${GitHubRepository}:environment:${GitHubEnvironment}
+      Policies:
+        - PolicyName: PublishStaticSite
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: InspectBucket
+                Effect: Allow
+                Action:
+                  - s3:GetBucketLocation
+                  - s3:ListBucket
+                Resource: !Sub arn:${AWS::Partition}:s3:::${S3BucketName}
+              - Sid: PublishObjects
+                Effect: Allow
+                Action:
+                  - s3:DeleteObject
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource: !Sub arn:${AWS::Partition}:s3:::${S3BucketName}/*
+              - Sid: RefreshCloudFront
+                Effect: Allow
+                Action:
+                  - cloudfront:CreateInvalidation
+                  - cloudfront:GetInvalidation
+                Resource: !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistributionId}
+      Tags:
+        - Key: Project
+          Value: grantwasil.com
+        - Key: ManagedBy
+          Value: CloudFormation
+
+Outputs:
+  DeploymentRoleArn:
+    Description: Add this value to GitHub as the AWS_DEPLOY_ROLE_ARN repository variable.
+    Value: !GetAtt DeploymentRole.Arn

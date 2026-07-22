@@ -1,0 +1,136 @@
+name: Build and deploy production
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grantwasil-com-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check Astro project
+        run: bun run check
+
+      - name: Build production site
+        run: bun run build
+
+      - name: Verify production output
+        run: bun run verify:build
+
+      - name: Upload production artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grantwasil-com-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  deployment-not-configured:
+    name: Report deployment readiness
+    needs: build
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (vars.AWS_DEPLOY_ROLE_ARN == '' ||
+      vars.AWS_REGION == '' ||
+      vars.S3_BUCKET == '' ||
+      vars.CLOUDFRONT_DISTRIBUTION_ID == '')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain why deployment was skipped
+        run: >-
+          echo "::warning::Build passed, but production deployment was skipped.
+          Configure AWS_DEPLOY_ROLE_ARN, AWS_REGION, S3_BUCKET, and
+          CLOUDFRONT_DISTRIBUTION_ID as repository variables."
+
+  deploy:
+    name: Deploy to AWS
+    needs: build
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      vars.AWS_DEPLOY_ROLE_ARN != '' &&
+      vars.AWS_REGION != '' &&
+      vars.S3_BUCKET != '' &&
+      vars.CLOUDFRONT_DISTRIBUTION_ID != ''
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://grantwasil.com
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download production artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: grantwasil-com-dist
+          path: dist
+
+      - name: Authenticate to AWS with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload pages and public assets
+        run: >-
+          aws s3 sync dist/ s3://${{ vars.S3_BUCKET }}/
+          --delete
+          --exclude "_astro/*"
+          --cache-control "public,max-age=0,must-revalidate"
+          --only-show-errors
+
+      - name: Upload immutable build assets
+        run: >-
+          aws s3 sync dist/_astro/ s3://${{ vars.S3_BUCKET }}/_astro/
+          --delete
+          --cache-control "public,max-age=31536000,immutable"
+          --only-show-errors
+
+      - name: Invalidate CloudFront and wait
+        shell: bash
+        run: |
+          invalidation_id="$(aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*" \
+            --query 'Invalidation.Id' \
+            --output text)"
+          aws cloudfront wait invalidation-completed \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --id "$invalidation_id"
+
+      - name: Smoke-test public routes
+        shell: bash
+        run: |
+          routes=(
+            "/"
+            "/work/organizational-ai-integration/"
+            "/notes/from-prompts-to-systems/"
+            "/work/reliability-as-a-foundation/"
+          )
+          for route in "${routes[@]}"; do
+            curl --fail --silent --show-error \
+              --retry 5 --retry-all-errors \
+              "https://grantwasil.com${route}" > /dev/null
+          done

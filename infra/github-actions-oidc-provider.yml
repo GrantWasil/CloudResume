@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: GitHub Actions OIDC provider for an AWS account. Deploy this once per account.
+
+Resources:
+  GitHubActionsOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+      Tags:
+        - Key: Project
+          Value: grantwasil.com
+        - Key: ManagedBy
+          Value: CloudFormation
+
+Outputs:
+  ProviderArn:
+    Description: ARN of the GitHub Actions OIDC provider.
+    Value: !Ref GitHubActionsOidcProvider
