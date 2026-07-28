@@ -1,0 +1,863 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { practices, selectedWork } from "../../data/designContent";
+---
+
+<ConceptLayout
+  title="Night School"
+  description="A reflective, literary design direction for Grant Wasil"
+  current="night-school"
+  themeColor="#15191a"
+>
+  <header class="night-header">
+    <a class="night-name" href="/designs/night-school/">
+      <span>Grant Wasil</span>
+      <small>AI Integration Engineer</small>
+    </a>
+    <p>Seminar notes on strategy, capability & systems</p>
+    <nav aria-label="Concept navigation">
+      <a href="#lecture">Lecture</a>
+      <a href="#reading">Reading list</a>
+      <a href="#bio">Bio</a>
+      <a href="#contact">Office hours</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="night-hero" aria-labelledby="night-title">
+      <div class="night-hero__folio">
+        <span>Folio 01</span>
+        <span>Summer 2026</span>
+      </div>
+      <div class="night-hero__copy">
+        <p>Tonight’s question</p>
+        <h1 id="night-title">
+          How does possibility<br />
+          become <em>dependable practice?</em>
+        </h1>
+        <div class="night-hero__answer">
+          <span>A working answer</span>
+          <p>
+            I help leaders turn AI possibility into sound direction, stronger
+            human capability, and working systems.
+          </p>
+        </div>
+      </div>
+      <aside class="night-hero__aside">
+        <figure>
+          <img
+            src="/grant-wasil-800.webp"
+            width="800"
+            height="534"
+            alt="Grant Wasil smiling in a sunlit office"
+          />
+          <figcaption>Grant, in daylight.</figcaption>
+        </figure>
+        <blockquote>
+          “Stay close enough to implementation that reality gets a vote.”
+        </blockquote>
+        <a href="#reading">Continue reading ↓</a>
+      </aside>
+      <div class="night-hero__annotation" aria-hidden="true">
+        <span>Not:</span>
+        <del>another software rollout</del>
+      </div>
+    </section>
+
+    <section class="night-lecture" id="lecture" aria-labelledby="night-lecture-title">
+      <div class="night-margin">
+        <span>Lecture 01</span>
+        <p>On the messy middle</p>
+      </div>
+      <div class="night-lecture__content">
+        <header>
+          <h2 id="night-lecture-title">Strategy, close enough<br />to implementation.</h2>
+          <p>
+            The hardest AI work lives between a compelling demo and a
+            dependable way of working. That is the space I help organizations
+            navigate.
+          </p>
+        </header>
+        <ol>
+          {practices.map((item) => (
+            <li>
+              <span>{item.number}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="night-thesis">
+      <span>Thesis / underline twice</span>
+      <p>AI implementation is not a software rollout.</p>
+      <strong>It is a redesign of decisions, capabilities, and systems.</strong>
+      <i aria-hidden="true"></i>
+    </section>
+
+    <section class="night-reading" id="reading" aria-labelledby="night-reading-title">
+      <div class="night-margin">
+        <span>Reading list</span>
+        <p>Selected work & field notes</p>
+      </div>
+      <div class="night-reading__content">
+        <header>
+          <h2 id="night-reading-title">Evidence for<br />the argument.</h2>
+          <p>Three paths into the work, each written to be useful on its own.</p>
+        </header>
+        <div class="night-reading__list">
+          {selectedWork.map((item) => (
+            <a href={item.href}>
+              <div class="night-reading__meta">
+                <span>{item.number}</span>
+                <span>{item.type}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <span class="night-reading__link">Read the note ↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="night-bio" id="bio" aria-labelledby="night-bio-title">
+      <div class="night-bio__mark" aria-hidden="true">GW</div>
+      <div class="night-bio__copy">
+        <p>Biographical note</p>
+        <h2 id="night-bio-title">I came to AI through systems, not hype.</h2>
+        <div>
+          <p>
+            My path runs through customer-facing work, web development,
+            election operations, and site reliability engineering. Each
+            chapter taught me the same thing: technology matters when it helps
+            people make better decisions and do stronger work.
+          </p>
+          <p>
+            Today, I work across AI strategy, organizational adoption,
+            education, venture design, and hands-on product development.
+          </p>
+        </div>
+      </div>
+      <aside>
+        <span>Margin note</span>
+        <p>
+          Board games. Immersive experiences. Colorado mountain air. Rooms
+          where curious people learn together.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="night-footer" id="contact">
+    <div class="night-footer__label">
+      <span>Office hours</span>
+      <span>By conversation</span>
+    </div>
+    <p>Working through<br />a consequential<br />AI question?</p>
+    <a href="mailto:dev@grantwasil.com">Let’s compare notes. <span>↗</span></a>
+    <div class="night-footer__base">
+      <span>dev@grantwasil.com</span>
+      <span>LinkedIn / GitHub / X</span>
+      <span>Grant Wasil © 2026</span>
+    </div>
+  </footer>
+</ConceptLayout>
+
+<style>
+  :global(body) {
+    --night: #15191a;
+    --night-soft: #202627;
+    --chalk: #e9e3d6;
+    --chalk-soft: #aaa99f;
+    --brass: #b48948;
+    --blue: #738e9a;
+    --line: rgba(233, 227, 214, 0.2);
+    color: var(--chalk);
+    background:
+      radial-gradient(circle, rgba(233, 227, 214, 0.055) 1px, transparent 1.2px),
+      var(--night);
+    background-size: 1.6rem 1.6rem;
+    font-family: "Public Sans Variable", Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  :global(::selection) {
+    color: var(--night);
+    background: var(--brass);
+  }
+
+  :global(a:focus-visible) {
+    outline: 2px solid var(--brass);
+    outline-offset: 5px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  blockquote,
+  figure {
+    margin-top: 0;
+  }
+
+  .night-header {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr auto;
+    gap: 3rem;
+    align-items: center;
+    min-height: 6.4rem;
+    padding: 1rem clamp(1.25rem, 4vw, 4.5rem);
+    background: rgba(21, 25, 26, 0.9);
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-name {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .night-name small {
+    margin-top: 0.3rem;
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .night-header > p {
+    margin: 0;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .night-header nav {
+    display: flex;
+    gap: 1.7rem;
+  }
+
+  .night-header nav a {
+    color: var(--chalk);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .night-hero {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      "folio folio"
+      "copy aside";
+    grid-template-columns: minmax(0, 1.3fr) minmax(22rem, 0.7fr);
+    min-height: calc(100svh - 6.4rem);
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-hero__folio {
+    display: flex;
+    grid-area: folio;
+    justify-content: space-between;
+    padding: 0.75rem clamp(1.25rem, 4vw, 4.5rem);
+    color: var(--chalk-soft);
+    border-bottom: 1px solid var(--line);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .night-hero__copy {
+    display: flex;
+    grid-area: copy;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(4rem, 9vw, 10rem) clamp(1.25rem, 6vw, 7rem);
+  }
+
+  .night-hero__copy > p,
+  .night-bio__copy > p,
+  .night-thesis > span {
+    margin-bottom: 1.8rem;
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .night-hero h1,
+  .night-lecture h2,
+  .night-reading h2,
+  .night-bio h2 {
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.055em;
+  }
+
+  .night-hero h1 {
+    max-width: 16ch;
+    margin-bottom: 4rem;
+    font-size: clamp(4rem, 7.6vw, 9rem);
+    line-height: 0.92;
+  }
+
+  .night-hero h1 em {
+    color: var(--brass);
+    font-weight: 400;
+  }
+
+  .night-hero__answer {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 35rem);
+    gap: 2rem;
+    padding-top: 1.7rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .night-hero__answer span,
+  .night-margin,
+  .night-reading__meta,
+  .night-footer__label {
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .night-hero__answer p {
+    margin: 0;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.35;
+  }
+
+  .night-hero__aside {
+    display: flex;
+    grid-area: aside;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(3rem, 6vw, 6rem);
+    background: var(--night-soft);
+    border-left: 1px solid var(--brass);
+  }
+
+  .night-hero__aside figure {
+    width: min(100%, 18rem);
+    margin: 0 auto 4rem;
+  }
+
+  .night-hero__aside img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    filter: grayscale(1) sepia(0.2) contrast(1.05);
+  }
+
+  .night-hero__aside figcaption {
+    margin-top: 0.8rem;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .night-hero__aside blockquote {
+    max-width: 22rem;
+    margin: 0 auto 2.5rem;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .night-hero__aside > a {
+    width: max-content;
+    padding-bottom: 0.3rem;
+    margin: 0 auto;
+    color: var(--brass);
+    border-bottom: 1px solid currentColor;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.6rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .night-hero__annotation {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    transform: rotate(-5deg);
+  }
+
+  .night-hero__annotation span {
+    color: var(--brass);
+  }
+
+  .night-lecture,
+  .night-reading {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.28fr) minmax(0, 1.72fr);
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-margin {
+    padding: clamp(4rem, 8vw, 9rem) clamp(1.25rem, 3vw, 3rem);
+    border-right: 1px solid var(--line);
+  }
+
+  .night-margin p {
+    margin-top: 1rem;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .night-lecture__content,
+  .night-reading__content {
+    padding: clamp(4rem, 9vw, 10rem) clamp(1.5rem, 7vw, 9rem);
+  }
+
+  .night-lecture header,
+  .night-reading header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.5fr);
+    gap: 4rem;
+    align-items: end;
+    padding-bottom: 4rem;
+  }
+
+  .night-lecture h2,
+  .night-reading h2,
+  .night-bio h2 {
+    margin: 0;
+    font-size: clamp(3.4rem, 6vw, 7.5rem);
+    line-height: 0.95;
+  }
+
+  .night-lecture header > p,
+  .night-reading header > p {
+    margin: 0;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+
+  .night-lecture ol {
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--brass);
+    list-style: none;
+  }
+
+  .night-lecture li {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 2rem;
+    padding: 2.3rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .night-lecture li > span {
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+  }
+
+  .night-lecture h3 {
+    margin-bottom: 0.8rem;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 400;
+  }
+
+  .night-lecture li p {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--chalk-soft);
+  }
+
+  .night-thesis {
+    position: relative;
+    padding: clamp(6rem, 12vw, 14rem) clamp(1.5rem, 10vw, 13rem);
+    overflow: hidden;
+    color: var(--night);
+    background: var(--chalk);
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-thesis > span {
+    color: #7a5e34;
+  }
+
+  .night-thesis p,
+  .night-thesis strong {
+    position: relative;
+    z-index: 2;
+    display: block;
+    max-width: 23ch;
+    margin: 0;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(3rem, 6vw, 7rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .night-thesis strong {
+    color: #86622b;
+    font-style: italic;
+  }
+
+  .night-thesis i {
+    position: absolute;
+    right: 8%;
+    bottom: 18%;
+    width: 20rem;
+    height: 4rem;
+    border-bottom: 0.35rem double var(--brass);
+    border-radius: 50%;
+    transform: rotate(-4deg);
+  }
+
+  .night-reading__list {
+    border-top: 1px solid var(--brass);
+  }
+
+  .night-reading__list > a {
+    display: grid;
+    grid-template-columns: 10rem minmax(16rem, 0.75fr) minmax(18rem, 1.25fr) 8rem;
+    gap: 2rem;
+    align-items: start;
+    padding: 2.5rem 0;
+    color: inherit;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .night-reading__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .night-reading h3 {
+    margin: 0;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(1.8rem, 2.7vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  .night-reading__list > a > p {
+    margin: 0;
+    color: var(--chalk-soft);
+  }
+
+  .night-reading__link {
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .night-bio {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1.3fr) minmax(18rem, 0.5fr);
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-bio__mark {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: var(--night);
+    background: var(--brass);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 6rem;
+    line-height: 0.7;
+    letter-spacing: -0.1em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .night-bio__copy {
+    padding: clamp(5rem, 9vw, 10rem) clamp(2rem, 7vw, 8rem);
+  }
+
+  .night-bio__copy h2 {
+    max-width: 13ch;
+    margin-bottom: 3rem;
+  }
+
+  .night-bio__copy > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 1.18rem;
+    line-height: 1.5;
+  }
+
+  .night-bio aside {
+    padding: clamp(4rem, 7vw, 8rem) 2rem;
+    background: var(--night-soft);
+    border-left: 1px solid var(--line);
+  }
+
+  .night-bio aside span {
+    color: var(--brass);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .night-bio aside p {
+    margin-top: 5rem;
+    color: var(--chalk-soft);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    line-height: 1.35;
+  }
+
+  .night-footer {
+    min-height: 88svh;
+    padding: clamp(5rem, 10vw, 11rem) clamp(1.25rem, 7vw, 8rem) 7rem;
+    background:
+      linear-gradient(90deg, transparent 0 10%, rgba(180, 137, 72, 0.15) 10.05% 10.12%, transparent 10.17%),
+      var(--night-soft);
+  }
+
+  .night-footer__label {
+    display: flex;
+    justify-content: space-between;
+    max-width: 32rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--brass);
+  }
+
+  .night-footer > p {
+    max-width: 11ch;
+    margin: 4rem 0;
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(4rem, 9vw, 10rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+  .night-footer > a {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 32rem);
+    padding: 1rem 0;
+    color: var(--brass);
+    border-bottom: 1px solid var(--brass);
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    text-decoration: none;
+  }
+
+  .night-footer__base {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+    margin-top: 8rem;
+    color: var(--chalk-soft);
+    border-top: 1px solid var(--line);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .night-header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .night-header > p {
+      display: none;
+    }
+
+    .night-hero {
+      grid-template-areas:
+        "folio"
+        "copy"
+        "aside";
+      grid-template-columns: 1fr;
+    }
+
+    .night-hero__aside {
+      display: grid;
+      grid-template-columns: 13rem 1fr auto;
+      gap: 3rem;
+      align-items: center;
+      border-top: 1px solid var(--brass);
+      border-left: 0;
+    }
+
+    .night-hero__aside figure,
+    .night-hero__aside blockquote {
+      margin: 0;
+    }
+
+    .night-hero__aside > a {
+      margin: 0;
+    }
+
+    .night-hero__annotation {
+      display: none;
+    }
+
+    .night-reading__list > a {
+      grid-template-columns: 8rem 1fr 6rem;
+    }
+
+    .night-reading__list > a > p {
+      display: none;
+    }
+
+    .night-bio {
+      grid-template-columns: 7rem 1fr;
+    }
+
+    .night-bio aside {
+      grid-column: 2;
+      border-top: 1px solid var(--line);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .night-header {
+      display: block;
+      min-height: auto;
+    }
+
+    .night-name {
+      padding: 0.5rem 0;
+    }
+
+    .night-header nav {
+      display: none;
+    }
+
+    .night-hero__copy {
+      padding: 5rem 1.25rem;
+    }
+
+    .night-hero__answer {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .night-hero__aside {
+      display: block;
+      padding: 3rem 1.25rem;
+    }
+
+    .night-hero__aside figure,
+    .night-hero__aside blockquote,
+    .night-hero__aside > a {
+      margin: 0 auto 2.5rem;
+    }
+
+    .night-lecture,
+    .night-reading {
+      grid-template-columns: 1fr;
+    }
+
+    .night-margin {
+      padding: 1rem 1.25rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .night-margin p {
+      display: none;
+    }
+
+    .night-lecture__content,
+    .night-reading__content {
+      padding: 4rem 1.25rem;
+    }
+
+    .night-lecture header,
+    .night-reading header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .night-reading__list > a {
+      grid-template-columns: 1fr auto;
+    }
+
+    .night-reading h3 {
+      grid-column: 1;
+    }
+
+    .night-reading__link {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+      writing-mode: vertical-rl;
+    }
+
+    .night-bio {
+      display: block;
+    }
+
+    .night-bio__mark {
+      display: block;
+      padding: 1rem;
+      font-size: 3rem;
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+
+    .night-bio__copy {
+      padding: 4rem 1.25rem;
+    }
+
+    .night-bio__copy > div {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .night-footer {
+      padding-inline: 1.25rem;
+    }
+
+    .night-footer__base {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>

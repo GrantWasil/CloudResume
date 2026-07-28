@@ -1,0 +1,1003 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { practices, selectedWork } from "../../data/designContent";
+---
+
+<ConceptLayout
+  title="Wonder Cabinet"
+  description="A curious, social, maker-minded design direction for Grant Wasil"
+  current="wonder-cabinet"
+  themeColor="#f3c928"
+>
+  <header class="wonder-header">
+    <a class="wonder-mark" href="/designs/wonder-cabinet/">
+      <span>G</span><span>W</span>
+      <strong>Grant Wasil</strong>
+    </a>
+    <p>Strategist / Builder / Convener</p>
+    <nav aria-label="Concept navigation">
+      <a href="#how">How I work</a>
+      <a href="#work">Things made</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="wonder-contact">Say hello ☺</a>
+  </header>
+
+  <main id="main-content">
+    <section class="wonder-hero" aria-labelledby="wonder-title">
+      <div class="wonder-orbit wonder-orbit--one" aria-hidden="true">
+        <span>?</span>
+      </div>
+      <div class="wonder-orbit wonder-orbit--two" aria-hidden="true">
+        <span>✦</span>
+      </div>
+      <div class="wonder-hero__copy">
+        <p class="wonder-role">AI Integration Engineer · Colorado</p>
+        <h1 id="wonder-title">
+          Turn “what if?”<br />
+          into <em>“here’s how.”</em>
+        </h1>
+        <p class="wonder-lede">
+          I help leaders turn AI possibility into sound direction, stronger
+          human capability, and working systems.
+        </p>
+        <div class="wonder-actions">
+          <a href="#work">See the work <span>↓</span></a>
+          <p>Bring a messy question.<br />We’ll make a useful map.</p>
+        </div>
+      </div>
+      <figure class="wonder-portrait">
+        <div class="wonder-portrait__arch">
+          <img
+            src="/grant-wasil-800.webp"
+            width="800"
+            height="534"
+            alt="Grant Wasil smiling in a sunlit office"
+          />
+        </div>
+        <figcaption>Human, for scale.</figcaption>
+      </figure>
+      <div class="wonder-object wonder-object--game" aria-hidden="true">
+        <span>YOUR<br />MOVE</span>
+      </div>
+      <div class="wonder-object wonder-object--note" aria-hidden="true">
+        <span>STRATEGY<br />SHOULD END<br />IN SOMETHING<br />PEOPLE CAN USE.</span>
+      </div>
+      <div class="wonder-object wonder-object--pencil" aria-hidden="true"></div>
+    </section>
+
+    <div class="wonder-ribbon" aria-hidden="true">
+      <span>CURIOSITY</span><i>✦</i><span>CLARITY</span><i>✦</i>
+      <span>CAPABILITY</span><i>✦</i><span>CRAFT</span><i>✦</i>
+    </div>
+
+    <section class="wonder-how" id="how" aria-labelledby="wonder-how-title">
+      <header>
+        <span>How the work moves</span>
+        <h2 id="wonder-how-title">Three things<br />on the table.</h2>
+        <p>
+          The interesting work happens where organizational questions,
+          human behavior, and technical possibility meet.
+        </p>
+      </header>
+      <ol>
+        {practices.map((item, index) => (
+          <li class={`wonder-how__item wonder-how__item--${index + 1}`}>
+            <span>{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <i aria-hidden="true">{index === 0 ? "?" : index === 1 ? "↔" : "✦"}</i>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="wonder-belief">
+      <div class="wonder-belief__top">A note pinned above the desk</div>
+      <p>AI implementation isn’t a software rollout.</p>
+      <strong>It’s a redesign of decisions, capabilities, and systems.</strong>
+      <span aria-hidden="true">YES!</span>
+    </section>
+
+    <section class="wonder-work" id="work" aria-labelledby="wonder-work-title">
+      <header>
+        <p>Open the cabinet</p>
+        <h2 id="wonder-work-title">Things made.<br />Things learned.</h2>
+      </header>
+      <div class="wonder-shelf">
+        {selectedWork.map((item, index) => (
+          <article class={`wonder-work__item wonder-work__item--${index + 1}`}>
+            <a href={item.href}>
+              <div>
+                <span>{item.number}</span>
+                <span>{item.type}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <strong>Take a look ↗</strong>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="wonder-about" id="about" aria-labelledby="wonder-about-title">
+      <div class="wonder-about__portrait">
+        <span>OFF THE CLOCK</span>
+        <div aria-hidden="true">
+          <i>♟</i>
+          <i>⌁</i>
+          <i>✂</i>
+          <i>☼</i>
+        </div>
+      </div>
+      <div class="wonder-about__copy">
+        <p>About the person</p>
+        <h2 id="wonder-about-title">I came to AI through systems—and stayed for the people.</h2>
+        <p>
+          My path runs through customer-facing work, web development, election
+          operations, and site reliability engineering. Each chapter taught me
+          that technology matters when it helps people make better decisions
+          and do stronger work.
+        </p>
+        <p>
+          Away from the diagram: board games, immersive experiences, Colorado
+          mountain air, and building spaces where curious people can learn
+          together.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wonder-footer" id="contact">
+    <div class="wonder-footer__badge" aria-hidden="true">LET’S<br />MAKE<br />SENSE</div>
+    <p>Have a possibility worth working through?</p>
+    <h2>Pull up<br />a chair.</h2>
+    <a href="mailto:dev@grantwasil.com">dev@grantwasil.com <span>↗</span></a>
+    <div class="wonder-footer__base">
+      <span>Grant Wasil · Littleton, CO</span>
+      <span>LinkedIn / GitHub / X</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+</ConceptLayout>
+
+<style>
+  :global(body) {
+    --cream: #f7f0df;
+    --brown: #392614;
+    --blue: #2458c6;
+    --yellow: #f3c928;
+    --pink: #eaa6b9;
+    --green: #4e8a69;
+    --red: #d84a2d;
+    color: var(--brown);
+    background: var(--cream);
+    font-family: "Public Sans Variable", Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  :global(::selection) {
+    color: var(--cream);
+    background: var(--blue);
+  }
+
+  :global(a:focus-visible) {
+    outline: 4px dotted var(--blue);
+    outline-offset: 5px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  figure {
+    margin-top: 0;
+  }
+
+  .wonder-header {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr auto auto;
+    gap: 2rem;
+    align-items: center;
+    min-height: 6rem;
+    padding: 0.8rem clamp(1rem, 4vw, 4rem);
+    border-bottom: 3px solid var(--brown);
+  }
+
+  .wonder-mark {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .wonder-mark > span {
+    display: grid;
+    width: 2.7rem;
+    height: 2.7rem;
+    place-items: center;
+    background: var(--yellow);
+    border: 2px solid var(--brown);
+    border-radius: 50%;
+    font: 800 1.1rem/1 Rockwell, "Courier New", serif;
+  }
+
+  .wonder-mark > span:nth-child(2) {
+    margin-left: -0.55rem;
+    background: var(--pink);
+    transform: rotate(8deg);
+  }
+
+  .wonder-mark strong {
+    margin-left: 0.8rem;
+    font-family: Rockwell, "Courier New", serif;
+    font-size: 0.9rem;
+  }
+
+  .wonder-header > p,
+  .wonder-header nav a,
+  .wonder-contact {
+    margin: 0;
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .wonder-header nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .wonder-header a {
+    color: inherit;
+  }
+
+  .wonder-header nav a {
+    text-decoration: none;
+  }
+
+  .wonder-contact {
+    padding: 0.75rem 1rem;
+    color: var(--cream) !important;
+    background: var(--blue);
+    border: 2px solid var(--brown);
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--brown);
+  }
+
+  .wonder-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(25rem, 0.85fr);
+    min-height: calc(100svh - 6rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 8% 88%, var(--yellow) 0 6rem, transparent 6.05rem),
+      var(--cream);
+    border-bottom: 3px solid var(--brown);
+  }
+
+  .wonder-hero__copy {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(4rem, 9vw, 9rem) clamp(1.25rem, 5vw, 6rem);
+  }
+
+  .wonder-role,
+  .wonder-how header > span,
+  .wonder-work header > p,
+  .wonder-about__copy > p:first-child {
+    margin-bottom: 1.6rem;
+    color: var(--blue);
+    font-size: 0.68rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .wonder-hero h1,
+  .wonder-how h2,
+  .wonder-work h2,
+  .wonder-about h2,
+  .wonder-footer h2 {
+    font-family: Rockwell, "Courier New", serif;
+    font-weight: 800;
+    letter-spacing: -0.055em;
+  }
+
+  .wonder-hero h1 {
+    max-width: 12ch;
+    margin-bottom: 2rem;
+    font-size: clamp(4.1rem, 8.2vw, 9.5rem);
+    line-height: 0.86;
+  }
+
+  .wonder-hero h1 em {
+    position: relative;
+    color: var(--blue);
+    font-style: normal;
+  }
+
+  .wonder-hero h1 em::after {
+    position: absolute;
+    right: 0;
+    bottom: -0.1em;
+    left: 0;
+    height: 0.12em;
+    content: "";
+    background: var(--pink);
+    border-radius: 50%;
+    transform: rotate(-1.5deg);
+  }
+
+  .wonder-lede {
+    max-width: 38rem;
+    margin-bottom: 2.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    line-height: 1.3;
+  }
+
+  .wonder-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .wonder-actions a {
+    display: flex;
+    gap: 1.3rem;
+    align-items: center;
+    padding: 0.95rem 1.2rem;
+    color: var(--cream);
+    background: var(--brown);
+    border: 2px solid var(--brown);
+    border-radius: 0.4rem 1.4rem 0.4rem 1.4rem;
+    font-size: 0.76rem;
+    font-weight: 780;
+    text-decoration: none;
+  }
+
+  .wonder-actions p {
+    margin: 0;
+    color: var(--green);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .wonder-portrait {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    justify-self: center;
+    width: min(84%, 34rem);
+    margin: 0;
+  }
+
+  .wonder-portrait__arch {
+    position: relative;
+    overflow: hidden;
+    background: var(--pink);
+    border: 4px solid var(--brown);
+    border-radius: 50% 50% 1rem 1rem;
+    box-shadow: 1.1rem 1.1rem 0 var(--yellow);
+  }
+
+  .wonder-portrait__arch::before {
+    position: absolute;
+    inset: 1rem;
+    z-index: 2;
+    pointer-events: none;
+    content: "";
+    border: 2px dashed rgba(247, 240, 223, 0.75);
+    border-radius: 50% 50% 0.3rem 0.3rem;
+  }
+
+  .wonder-portrait img {
+    width: 100%;
+    min-height: 37rem;
+    object-fit: cover;
+    filter: saturate(0.9);
+  }
+
+  .wonder-portrait figcaption {
+    width: max-content;
+    padding: 0.55rem 0.8rem;
+    margin: -0.5rem 0 0 auto;
+    background: var(--yellow);
+    border: 2px solid var(--brown);
+    font: 700 0.65rem/1 "Courier New", monospace;
+    transform: rotate(-2deg);
+  }
+
+  .wonder-orbit {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--brown);
+    border-radius: 50%;
+    animation: bob 5s ease-in-out infinite;
+  }
+
+  .wonder-orbit--one {
+    top: 8%;
+    right: 3%;
+    width: 5.5rem;
+    height: 5.5rem;
+    background: var(--yellow);
+    font: 800 2.5rem/1 Rockwell, serif;
+  }
+
+  .wonder-orbit--two {
+    right: 42%;
+    bottom: 8%;
+    width: 4rem;
+    height: 4rem;
+    color: var(--cream);
+    background: var(--blue);
+    animation-delay: -2s;
+  }
+
+  .wonder-object {
+    position: absolute;
+    z-index: 4;
+  }
+
+  .wonder-object--game {
+    top: 12%;
+    right: 39%;
+    display: grid;
+    width: 5.6rem;
+    height: 5.6rem;
+    place-items: center;
+    color: var(--cream);
+    background: var(--red);
+    border: 3px solid var(--brown);
+    box-shadow: 5px 5px 0 var(--brown);
+    font: 800 0.72rem/0.95 Rockwell, serif;
+    text-align: center;
+    transform: rotate(-8deg);
+  }
+
+  .wonder-object--note {
+    right: 2%;
+    bottom: 10%;
+    padding: 1rem;
+    background: var(--pink);
+    border: 2px solid var(--brown);
+    font: 800 0.62rem/1.2 "Courier New", monospace;
+    transform: rotate(4deg);
+  }
+
+  .wonder-object--pencil {
+    top: 27%;
+    right: 47%;
+    width: 0.9rem;
+    height: 9rem;
+    background: var(--yellow);
+    border: 2px solid var(--brown);
+    transform: rotate(42deg);
+  }
+
+  .wonder-object--pencil::after {
+    position: absolute;
+    bottom: -1.2rem;
+    left: -0.1rem;
+    content: "";
+    border-top: 1.2rem solid var(--brown);
+    border-right: 0.45rem solid transparent;
+    border-left: 0.45rem solid transparent;
+  }
+
+  .wonder-ribbon {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    overflow: hidden;
+    padding: 1rem;
+    color: var(--cream);
+    background: var(--blue);
+    border-bottom: 3px solid var(--brown);
+    font-family: Rockwell, "Courier New", serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .wonder-ribbon i {
+    color: var(--yellow);
+    font-style: normal;
+  }
+
+  .wonder-how {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.55fr) minmax(0, 1.45fr);
+    gap: clamp(3rem, 7vw, 8rem);
+    padding: clamp(5rem, 10vw, 10rem) clamp(1.25rem, 5vw, 6rem);
+    background:
+      radial-gradient(circle at 93% 8%, var(--pink) 0 5rem, transparent 5.1rem),
+      var(--cream);
+    border-bottom: 3px solid var(--brown);
+  }
+
+  .wonder-how h2,
+  .wonder-work h2,
+  .wonder-about h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(3.2rem, 6vw, 7rem);
+    line-height: 0.88;
+  }
+
+  .wonder-how header > p {
+    max-width: 26rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+  }
+
+  .wonder-how ol {
+    display: grid;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .wonder-how__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem 0.8fr 1.2fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 2rem 5rem 2rem 1.5rem;
+    border: 3px solid var(--brown);
+    border-radius: 0.5rem 2.2rem 0.5rem 2.2rem;
+    box-shadow: 0.55rem 0.55rem 0 var(--brown);
+  }
+
+  .wonder-how__item--1 {
+    background: var(--yellow);
+    transform: rotate(-1deg);
+  }
+
+  .wonder-how__item--2 {
+    color: var(--cream);
+    background: var(--green);
+    transform: rotate(0.7deg);
+  }
+
+  .wonder-how__item--3 {
+    background: var(--pink);
+    transform: rotate(-0.4deg);
+  }
+
+  .wonder-how__item > span {
+    font: 800 0.75rem/1 "Courier New", monospace;
+  }
+
+  .wonder-how__item h3 {
+    margin: 0;
+    font: 800 clamp(1.6rem, 2.5vw, 2.5rem)/0.95 Rockwell, "Courier New", serif;
+    letter-spacing: -0.035em;
+  }
+
+  .wonder-how__item p {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.4;
+  }
+
+  .wonder-how__item i {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    font: 800 2rem/1 Rockwell, serif;
+    font-style: normal;
+  }
+
+  .wonder-belief {
+    position: relative;
+    padding: clamp(5rem, 10vw, 11rem) clamp(1.25rem, 8vw, 10rem);
+    overflow: hidden;
+    color: var(--cream);
+    background: var(--brown);
+    border-bottom: 3px solid var(--brown);
+    text-align: center;
+  }
+
+  .wonder-belief__top {
+    width: max-content;
+    padding: 0.55rem 0.85rem;
+    margin: 0 auto 3rem;
+    color: var(--brown);
+    background: var(--yellow);
+    font: 700 0.65rem/1 "Courier New", monospace;
+    text-transform: uppercase;
+    transform: rotate(-1.5deg);
+  }
+
+  .wonder-belief p,
+  .wonder-belief strong {
+    display: block;
+    max-width: 24ch;
+    margin-inline: auto;
+    font-family: Rockwell, "Courier New", serif;
+    font-size: clamp(2.6rem, 5vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+  }
+
+  .wonder-belief p {
+    margin-bottom: 0.4rem;
+  }
+
+  .wonder-belief strong {
+    color: var(--pink);
+  }
+
+  .wonder-belief > span {
+    position: absolute;
+    right: 5%;
+    bottom: 9%;
+    color: var(--yellow);
+    font: 800 clamp(2rem, 4vw, 5rem)/1 Rockwell, serif;
+    transform: rotate(-12deg);
+  }
+
+  .wonder-work {
+    padding: clamp(5rem, 10vw, 10rem) clamp(1.25rem, 5vw, 6rem);
+    background: var(--yellow);
+    border-bottom: 3px solid var(--brown);
+  }
+
+  .wonder-work header {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+
+  .wonder-work header > p {
+    align-self: start;
+  }
+
+  .wonder-shelf {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    align-items: end;
+    padding-bottom: 2rem;
+    border-bottom: 0.8rem solid var(--brown);
+  }
+
+  .wonder-work__item {
+    grid-column: span 4;
+    border: 3px solid var(--brown);
+    box-shadow: 0.5rem 0.5rem 0 var(--brown);
+  }
+
+  .wonder-work__item--1 {
+    background: var(--cream);
+  }
+
+  .wonder-work__item--2 {
+    color: var(--cream);
+    background: var(--blue);
+    border-radius: 50% 50% 0 0;
+  }
+
+  .wonder-work__item--3 {
+    background: var(--pink);
+    transform: rotate(1deg);
+  }
+
+  .wonder-work__item a {
+    display: flex;
+    min-height: 27rem;
+    flex-direction: column;
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .wonder-work__item a > div {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid currentColor;
+    font: 700 0.62rem/1 "Courier New", monospace;
+    text-transform: uppercase;
+  }
+
+  .wonder-work__item h3 {
+    margin: 3rem 0 1.5rem;
+    font: 800 clamp(2rem, 3.2vw, 3.6rem)/0.9 Rockwell, "Courier New", serif;
+    letter-spacing: -0.045em;
+  }
+
+  .wonder-work__item p {
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.4;
+  }
+
+  .wonder-work__item strong {
+    margin-top: auto;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .wonder-about {
+    display: grid;
+    grid-template-columns: minmax(20rem, 0.65fr) minmax(0, 1.35fr);
+    border-bottom: 3px solid var(--brown);
+  }
+
+  .wonder-about__portrait {
+    display: flex;
+    min-height: 45rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    color: var(--cream);
+    background: var(--green);
+    border-right: 3px solid var(--brown);
+  }
+
+  .wonder-about__portrait > span {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .wonder-about__portrait > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .wonder-about__portrait i {
+    display: grid;
+    aspect-ratio: 1;
+    place-items: center;
+    color: var(--brown);
+    background: var(--yellow);
+    border: 3px solid var(--brown);
+    border-radius: 50%;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-style: normal;
+  }
+
+  .wonder-about__portrait i:nth-child(2) {
+    background: var(--pink);
+    border-radius: 0.5rem;
+  }
+
+  .wonder-about__portrait i:nth-child(3) {
+    color: var(--cream);
+    background: var(--blue);
+    border-radius: 0.5rem 50% 50% 0.5rem;
+  }
+
+  .wonder-about__copy {
+    padding: clamp(5rem, 9vw, 10rem) clamp(1.5rem, 7vw, 9rem);
+  }
+
+  .wonder-about__copy > p:not(:first-child) {
+    max-width: 44rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+    line-height: 1.45;
+  }
+
+  .wonder-footer {
+    position: relative;
+    min-height: 85svh;
+    padding: clamp(5rem, 10vw, 10rem) clamp(1.25rem, 6vw, 7rem) 7rem;
+    overflow: hidden;
+    color: var(--cream);
+    background: var(--blue);
+  }
+
+  .wonder-footer > p {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .wonder-footer h2 {
+    max-width: 9ch;
+    margin: 3rem 0;
+    color: var(--yellow);
+    font-size: clamp(5rem, 12vw, 14rem);
+    line-height: 0.76;
+  }
+
+  .wonder-footer > a {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 35rem);
+    padding: 1.1rem 1.4rem;
+    color: var(--brown);
+    background: var(--pink);
+    border: 3px solid var(--brown);
+    border-radius: 999px;
+    box-shadow: 0.5rem 0.5rem 0 var(--brown);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .wonder-footer__badge {
+    position: absolute;
+    top: 10%;
+    right: 7%;
+    display: grid;
+    width: 9rem;
+    height: 9rem;
+    place-items: center;
+    color: var(--brown);
+    background: var(--yellow);
+    border: 4px solid var(--brown);
+    border-radius: 50%;
+    font: 800 1rem/0.9 Rockwell, serif;
+    text-align: center;
+    transform: rotate(9deg);
+  }
+
+  .wonder-footer__base {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+    margin-top: 8rem;
+    border-top: 2px solid rgba(247, 240, 223, 0.55);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-3deg);
+    }
+    50% {
+      transform: translateY(-0.8rem) rotate(4deg);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .wonder-header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .wonder-header > p,
+    .wonder-header nav {
+      display: none;
+    }
+
+    .wonder-hero {
+      grid-template-columns: 1fr;
+      padding-bottom: 6rem;
+    }
+
+    .wonder-portrait {
+      width: min(75%, 34rem);
+    }
+
+    .wonder-object--game {
+      top: 48%;
+      right: 10%;
+    }
+
+    .wonder-object--pencil {
+      top: 51%;
+      right: 82%;
+    }
+
+    .wonder-how {
+      grid-template-columns: 1fr;
+    }
+
+    .wonder-shelf {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wonder-work__item {
+      grid-column: auto;
+    }
+
+    .wonder-work__item--3 {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .wonder-mark strong {
+      display: none;
+    }
+
+    .wonder-contact {
+      font-size: 0.58rem;
+    }
+
+    .wonder-hero__copy {
+      padding: 5rem 1.25rem 3rem;
+    }
+
+    .wonder-actions p,
+    .wonder-object--game,
+    .wonder-object--pencil,
+    .wonder-orbit--two {
+      display: none;
+    }
+
+    .wonder-object--note {
+      right: 1rem;
+      bottom: 2rem;
+    }
+
+    .wonder-how__item {
+      grid-template-columns: 2.5rem 1fr;
+      padding-right: 2rem;
+    }
+
+    .wonder-how__item p {
+      grid-column: 2;
+    }
+
+    .wonder-how__item i {
+      display: none;
+    }
+
+    .wonder-work header {
+      display: block;
+    }
+
+    .wonder-shelf {
+      display: block;
+      border-bottom-width: 0.5rem;
+    }
+
+    .wonder-work__item {
+      margin-bottom: 1.5rem;
+      transform: none;
+    }
+
+    .wonder-about {
+      grid-template-columns: 1fr;
+    }
+
+    .wonder-about__portrait {
+      min-height: 34rem;
+      border-right: 0;
+      border-bottom: 3px solid var(--brown);
+    }
+
+    .wonder-footer__badge {
+      top: 4rem;
+      right: 1rem;
+      width: 6rem;
+      height: 6rem;
+      font-size: 0.7rem;
+    }
+
+    .wonder-footer__base {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>

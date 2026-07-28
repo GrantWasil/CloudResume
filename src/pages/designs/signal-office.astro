@@ -1,0 +1,707 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { practices, selectedWork } from "../../data/designContent";
+---
+
+<ConceptLayout
+  title="Signal Office"
+  description="A rigorous, direct editorial design direction for Grant Wasil"
+  current="signal-office"
+  themeColor="#f4f4f0"
+>
+  <header class="signal-header">
+    <a href="/designs/signal-office/" class="signal-name">Grant Wasil</a>
+    <p>AI Integration Engineer</p>
+    <p>Littleton, Colorado / USA</p>
+    <nav aria-label="Concept navigation">
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#profile">Profile</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="signal-hero" aria-labelledby="signal-title">
+      <div class="signal-hero__number" aria-hidden="true">01</div>
+      <div class="signal-hero__label">
+        <span>POSITION / 2026</span>
+        <span>STRATEGY → SYSTEM</span>
+      </div>
+      <h1 id="signal-title">
+        Turn possibility<br />
+        into <em>practice.</em>
+      </h1>
+      <p class="signal-hero__lede">
+        I help leaders decide how AI should change the way their organizations
+        work—and stay close enough to implementation to make that change real.
+      </p>
+      <div class="signal-hero__portrait">
+        <img
+          src="/grant-wasil-800.webp"
+          width="800"
+          height="534"
+          alt="Grant Wasil smiling in a sunlit office"
+        />
+      </div>
+      <a class="signal-hero__cta" href="#work">
+        <span>Selected work</span>
+        <strong>↓</strong>
+      </a>
+      <p class="signal-hero__principle">
+        Clear direction.<br />Stronger capability.<br />Working systems.
+      </p>
+    </section>
+
+    <section class="signal-approach" id="approach" aria-labelledby="signal-approach-title">
+      <header>
+        <span class="signal-section-number">02</span>
+        <p>Approach</p>
+        <h2 id="signal-approach-title">Strategy, close enough<br />to implementation.</h2>
+      </header>
+      <ol>
+        {practices.map((item) => (
+          <li>
+            <span>{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="signal-statement">
+      <p>AI implementation</p>
+      <strong>is not a software rollout.</strong>
+      <p>It is a redesign of</p>
+      <strong>decisions, capabilities, and systems.</strong>
+    </section>
+
+    <section class="signal-work" id="work" aria-labelledby="signal-work-title">
+      <header>
+        <span class="signal-section-number">03</span>
+        <p>Selected work / thinking</p>
+        <h2 id="signal-work-title">Evidence<br />over adjectives.</h2>
+      </header>
+      <div class="signal-work__list">
+        {selectedWork.map((item) => (
+          <a href={item.href}>
+            <span class="signal-work__number">{item.number}</span>
+            <p class="signal-work__type">{item.type}</p>
+            <h3>{item.title}</h3>
+            <p class="signal-work__description">{item.description}</p>
+            <span class="signal-work__arrow">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="signal-profile" id="profile" aria-labelledby="signal-profile-title">
+      <div class="signal-profile__title">
+        <span class="signal-section-number">04</span>
+        <p>Profile</p>
+        <h2 id="signal-profile-title">Systems,<br />not hype.</h2>
+      </div>
+      <div class="signal-profile__text">
+        <p>
+          My path runs through customer-facing work, web development, election
+          operations, and site reliability engineering. Each chapter taught me
+          the same thing: technology matters when it helps people make better
+          decisions and do stronger work.
+        </p>
+        <p>
+          Today I work across AI strategy, organizational adoption, education,
+          venture design, and hands-on product development.
+        </p>
+      </div>
+      <aside>
+        <span>Outside work</span>
+        <p>Board games / immersive experiences / mountain air / curious people</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="signal-footer" id="contact">
+    <span>05 / Contact</span>
+    <h2>Useful<br />conversation?</h2>
+    <a href="mailto:dev@grantwasil.com">dev@grantwasil.com ↗</a>
+    <div>
+      <p>Grant Wasil © 2026</p>
+      <p>LinkedIn / GitHub / X</p>
+      <p>39.6133° N / 105.0166° W</p>
+    </div>
+  </footer>
+</ConceptLayout>
+
+<style>
+  :global(body) {
+    --white: #f4f4f0;
+    --black: #101112;
+    --red: #e1372d;
+    --grey: #777b7a;
+    --line: #b8bab6;
+    color: var(--black);
+    background: var(--white);
+    font-family: "Public Sans Variable", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+  }
+
+  :global(::selection) {
+    color: var(--white);
+    background: var(--red);
+  }
+
+  :global(a:focus-visible) {
+    outline: 3px solid var(--red);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  .signal-header {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr 1.8fr;
+    align-items: center;
+    min-height: 5.2rem;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .signal-header > * {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    padding: 1rem clamp(1rem, 2vw, 2.2rem);
+    margin: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .signal-header > *:last-child {
+    border-right: 0;
+  }
+
+  .signal-name {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 780;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  .signal-header > p,
+  .signal-header nav a {
+    color: var(--grey);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .signal-header nav {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .signal-header nav a {
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .signal-hero {
+    display: grid;
+    grid-template-areas:
+      "number label label portrait"
+      "number title title portrait"
+      "number lede principle portrait"
+      "number cta cta portrait";
+    grid-template-columns: 0.26fr minmax(0, 0.85fr) minmax(18rem, 0.55fr) minmax(23rem, 0.68fr);
+    grid-template-rows: auto 1fr auto auto;
+    min-height: calc(100svh - 5.2rem);
+    border-bottom: 1px solid var(--black);
+  }
+
+  .signal-hero__number {
+    display: flex;
+    grid-area: number;
+    align-items: end;
+    padding: 1.5rem;
+    color: var(--red);
+    border-right: 1px solid var(--line);
+    font-size: clamp(4rem, 8vw, 10rem);
+    font-weight: 800;
+    line-height: 0.75;
+    letter-spacing: -0.08em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .signal-hero__label {
+    display: flex;
+    grid-area: label;
+    justify-content: space-between;
+    padding: 1.15rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.57rem;
+    letter-spacing: 0.05em;
+  }
+
+  .signal-hero h1 {
+    display: flex;
+    grid-area: title;
+    align-items: center;
+    max-width: 14ch;
+    padding: clamp(3rem, 6vw, 7rem) 1.5rem;
+    margin: 0;
+    font-size: clamp(4.8rem, 8.5vw, 10rem);
+    font-weight: 760;
+    line-height: 0.82;
+    letter-spacing: -0.075em;
+  }
+
+  .signal-hero h1 em {
+    color: var(--red);
+    font-style: normal;
+  }
+
+  .signal-hero__lede {
+    grid-area: lede;
+    padding: 1.5rem;
+    margin: 0;
+    border-top: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+    font-weight: 520;
+    line-height: 1.35;
+  }
+
+  .signal-hero__principle {
+    grid-area: principle;
+    padding: 1.5rem;
+    margin: 0;
+    color: var(--grey);
+    border-top: 1px solid var(--line);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.65rem;
+    line-height: 1.7;
+    text-transform: uppercase;
+  }
+
+  .signal-hero__portrait {
+    position: relative;
+    grid-area: portrait;
+    overflow: hidden;
+    border-left: 1px solid var(--black);
+  }
+
+  .signal-hero__portrait::after {
+    position: absolute;
+    top: 12%;
+    right: 0;
+    width: 28%;
+    height: 2rem;
+    content: "";
+    background: var(--red);
+  }
+
+  .signal-hero__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.1);
+  }
+
+  .signal-hero__cta {
+    display: flex;
+    grid-area: cta;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    color: var(--white);
+    background: var(--black);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.68rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .signal-hero__cta strong {
+    color: var(--red);
+    font-size: 1rem;
+  }
+
+  .signal-approach,
+  .signal-work {
+    display: grid;
+    grid-template-columns: minmax(23rem, 0.75fr) minmax(0, 1.25fr);
+    border-bottom: 1px solid var(--black);
+  }
+
+  .signal-approach > header,
+  .signal-work > header {
+    padding: clamp(4rem, 8vw, 9rem) clamp(1.5rem, 4vw, 4.5rem);
+    border-right: 1px solid var(--black);
+  }
+
+  .signal-section-number {
+    display: block;
+    margin-bottom: 5rem;
+    color: var(--red);
+    font-size: clamp(4rem, 6vw, 7rem);
+    font-weight: 790;
+    line-height: 0.7;
+    letter-spacing: -0.07em;
+  }
+
+  .signal-approach header > p,
+  .signal-work header > p,
+  .signal-profile__title > p {
+    margin-bottom: 1rem;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.61rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .signal-approach h2,
+  .signal-work h2,
+  .signal-profile h2,
+  .signal-footer h2 {
+    margin: 0;
+    font-size: clamp(3.4rem, 6vw, 7rem);
+    font-weight: 760;
+    line-height: 0.86;
+    letter-spacing: -0.07em;
+  }
+
+  .signal-approach ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .signal-approach li {
+    display: grid;
+    grid-template-columns: 4rem minmax(13rem, 0.7fr) minmax(18rem, 1.3fr);
+    gap: 2rem;
+    min-height: 14rem;
+    align-items: start;
+    padding: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .signal-approach li:last-child {
+    border-bottom: 0;
+  }
+
+  .signal-approach li > span,
+  .signal-work__number,
+  .signal-work__type {
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+  }
+
+  .signal-approach h3 {
+    margin: 0;
+    font-size: clamp(1.7rem, 2.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .signal-approach li p {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--grey);
+  }
+
+  .signal-statement {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    padding: clamp(5rem, 10vw, 12rem) clamp(1.5rem, 6vw, 7rem);
+    color: var(--white);
+    background: var(--red);
+    border-bottom: 1px solid var(--black);
+  }
+
+  .signal-statement p,
+  .signal-statement strong {
+    padding: 0.35rem 0;
+    margin: 0;
+    font-size: clamp(2.4rem, 5vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .signal-statement p {
+    font-weight: 350;
+  }
+
+  .signal-statement strong {
+    font-weight: 780;
+  }
+
+  .signal-work {
+    grid-template-columns: minmax(23rem, 0.55fr) minmax(0, 1.45fr);
+  }
+
+  .signal-work__list > a {
+    display: grid;
+    grid-template-columns: 3rem 9rem minmax(18rem, 0.8fr) minmax(18rem, 1.2fr) 2rem;
+    gap: 1.5rem;
+    align-items: start;
+    min-height: 13rem;
+    padding: 2rem;
+    color: inherit;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition:
+      color 140ms linear,
+      background 140ms linear;
+  }
+
+  .signal-work__list > a:last-child {
+    border-bottom: 0;
+  }
+
+  .signal-work__list > a:hover {
+    color: var(--white);
+    background: var(--black);
+  }
+
+  .signal-work__type {
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  .signal-work h3 {
+    margin: 0;
+    font-size: clamp(1.7rem, 2.4vw, 2.8rem);
+    font-weight: 730;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .signal-work__description {
+    margin: 0;
+    color: var(--grey);
+    font-size: 0.85rem;
+  }
+
+  .signal-work__arrow {
+    justify-self: end;
+    font-size: 1.2rem;
+  }
+
+  .signal-profile {
+    display: grid;
+    grid-template-columns: minmax(22rem, 0.6fr) minmax(22rem, 0.8fr) minmax(18rem, 0.45fr);
+    border-bottom: 1px solid var(--black);
+  }
+
+  .signal-profile > * {
+    padding: clamp(4rem, 7vw, 8rem) clamp(1.5rem, 4vw, 4rem);
+    border-right: 1px solid var(--black);
+  }
+
+  .signal-profile > *:last-child {
+    border-right: 0;
+  }
+
+  .signal-profile__text {
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 510;
+    line-height: 1.35;
+  }
+
+  .signal-profile aside {
+    color: var(--white);
+    background: var(--black);
+  }
+
+  .signal-profile aside span {
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .signal-profile aside p {
+    margin-top: 5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .signal-footer {
+    min-height: 85svh;
+    padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 6rem) 7rem;
+    color: var(--white);
+    background: var(--black);
+  }
+
+  .signal-footer > span {
+    color: var(--red);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .signal-footer h2 {
+    max-width: 10ch;
+    margin: 5rem 0 3rem;
+    font-size: clamp(5rem, 12vw, 14rem);
+  }
+
+  .signal-footer > a {
+    color: var(--red);
+    font-size: clamp(1.4rem, 3vw, 3rem);
+    font-weight: 740;
+    letter-spacing: -0.04em;
+  }
+
+  .signal-footer > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    margin-top: 7rem;
+    border-top: 1px solid #444;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .signal-header {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .signal-header > p {
+      display: none;
+    }
+
+    .signal-hero {
+      grid-template-areas:
+        "number label"
+        "number title"
+        "number lede"
+        "number portrait"
+        "number principle"
+        "number cta";
+      grid-template-columns: 6rem 1fr;
+    }
+
+    .signal-hero__portrait {
+      min-height: 36rem;
+      border-top: 1px solid var(--black);
+      border-left: 0;
+    }
+
+    .signal-hero__principle {
+      border-right: 0;
+    }
+
+    .signal-approach,
+    .signal-work {
+      grid-template-columns: 1fr;
+    }
+
+    .signal-approach > header,
+    .signal-work > header {
+      border-right: 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .signal-work__list > a {
+      grid-template-columns: 3rem 7rem 1fr 2rem;
+    }
+
+    .signal-work__description {
+      display: none;
+    }
+
+    .signal-profile {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .signal-profile aside {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .signal-header {
+      display: block;
+      min-height: auto;
+    }
+
+    .signal-header > * {
+      min-height: 3.5rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .signal-header nav {
+      display: none;
+    }
+
+    .signal-hero {
+      grid-template-areas:
+        "label"
+        "title"
+        "lede"
+        "portrait"
+        "principle"
+        "cta";
+      grid-template-columns: 1fr;
+    }
+
+    .signal-hero__number {
+      display: none;
+    }
+
+    .signal-hero h1 {
+      padding-block: 4rem;
+    }
+
+    .signal-approach li {
+      grid-template-columns: 2.5rem 1fr;
+    }
+
+    .signal-approach li p {
+      grid-column: 2;
+    }
+
+    .signal-statement {
+      grid-template-columns: 1fr;
+    }
+
+    .signal-statement p {
+      margin-top: 1.5rem;
+    }
+
+    .signal-work__list > a {
+      grid-template-columns: 2rem 1fr 1.5rem;
+    }
+
+    .signal-work__type {
+      display: none;
+    }
+
+    .signal-profile {
+      display: block;
+    }
+
+    .signal-profile > * {
+      border-right: 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .signal-footer > div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
