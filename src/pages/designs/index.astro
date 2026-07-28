@@ -1,0 +1,444 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+
+const concepts = [
+  {
+    number: "01",
+    slug: "field-guide",
+    name: "Field Guide",
+    register: "Grounded · Observant · Colorado",
+    thesis: "AI implementation as wayfinding: read the terrain, choose a route, leave a trail others can follow.",
+    detail: "Warm editorial composition, generous margins, topographic marks, rust-red waypoints, and a field-journal rhythm.",
+  },
+  {
+    number: "02",
+    slug: "working-studio",
+    name: "Working Studio",
+    register: "Practical · Tactile · Builder-led",
+    thesis: "A working wall for someone who makes strategy tangible with teams—not a polished consultancy brochure.",
+    detail: "Industrial labels, clipped imagery, visible joins, safety orange, and a modular workshop composition.",
+  },
+  {
+    number: "03",
+    slug: "signal-office",
+    name: "Signal Office",
+    register: "Exact · Direct · Strategic",
+    thesis: "Clarity is the product: a rigorous editorial system that makes the argument before it decorates it.",
+    detail: "Hard grid, oversized numbering, black and white, one signal red, and tightly controlled typography.",
+  },
+  {
+    number: "04",
+    slug: "wonder-cabinet",
+    name: "Wonder Cabinet",
+    register: "Curious · Social · Unexpected",
+    thesis: "The strategic practitioner is also a maker, host, game designer, and builder of memorable experiences.",
+    detail: "Collected objects, joyful color, playful scale, and small surprises that reward exploration.",
+  },
+  {
+    number: "05",
+    slug: "night-school",
+    name: "Night School",
+    register: "Reflective · Generous · Serious",
+    thesis: "A late-evening seminar for people doing consequential work: thoughtful, candid, and built for useful notes.",
+    detail: "Charcoal ground, literary type, brass rules, margin annotations, and a calm lecture-notebook cadence.",
+  },
+];
+---
+
+<ConceptLayout
+  title="Five directions"
+  description="Five alternative design directions for grantwasil.com"
+  current=""
+  themeColor="#efe9dd"
+>
+  <main id="main-content" class="gallery">
+    <header class="gallery__header">
+      <div>
+        <p class="gallery__kicker">grantwasil.com · design study · July 2026</p>
+        <h1>Five ways this site<br />could feel like <em>you.</em></h1>
+      </div>
+      <p class="gallery__intro">
+        Grant Wasil is an AI Integration Engineer working from strategy to
+        implementation.
+        <br /><br />
+        The positioning and proof remain consistent. Everything else—composition,
+        typography, color, motion, and emotional register—gets to move.
+      </p>
+    </header>
+
+    <div class="gallery__list">
+      {concepts.map((concept) => (
+        <article class={`concept-row concept-row--${concept.slug}`}>
+          <a href={`/designs/${concept.slug}/`}>
+            <span class="concept-row__number">{concept.number}</span>
+            <div class="concept-row__copy">
+              <p>{concept.register}</p>
+              <h2>{concept.name}</h2>
+              <strong>{concept.thesis}</strong>
+              <span>{concept.detail}</span>
+            </div>
+            <div class="concept-row__preview" aria-hidden="true">
+              <span class="preview-name">GW</span>
+              <span class="preview-line"></span>
+              <span class="preview-title">Possibility<br />→ practice</span>
+              <span class="preview-dot"></span>
+            </div>
+            <span class="concept-row__open">Open direction ↗</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <footer class="gallery__footer">
+      <p>These are design studies, not five different stories.</p>
+      <a href="/">Return to the current draft</a>
+    </footer>
+  </main>
+</ConceptLayout>
+
+<style>
+  :global(body) {
+    color: #1d211e;
+    background: #efe9dd;
+    font-family: "Public Sans Variable", Arial, sans-serif;
+  }
+
+  :global(::selection) {
+    color: #efe9dd;
+    background: #1d211e;
+  }
+
+  .gallery {
+    width: min(100%, 100rem);
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem);
+  }
+
+  .gallery__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    gap: 4rem;
+    align-items: end;
+    min-height: 55svh;
+    padding: 4rem 0;
+    border-bottom: 2px solid #1d211e;
+  }
+
+  .gallery__kicker {
+    margin: 0 0 2rem;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gallery h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(3.8rem, 8vw, 9.5rem);
+    font-weight: 520;
+    line-height: 0.84;
+    letter-spacing: -0.065em;
+  }
+
+  .gallery h1 em {
+    color: #a84129;
+    font-weight: 360;
+  }
+
+  .gallery__intro {
+    max-width: 35rem;
+    margin: 0;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.85rem);
+    line-height: 1.3;
+  }
+
+  .gallery__list {
+    border-bottom: 2px solid #1d211e;
+  }
+
+  .concept-row {
+    --row-accent: #a84129;
+    --row-bg: transparent;
+    border-bottom: 1px solid rgba(29, 33, 30, 0.35);
+  }
+
+  .concept-row:last-child {
+    border-bottom: 0;
+  }
+
+  .concept-row > a {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4rem minmax(20rem, 1fr) minmax(18rem, 0.8fr) auto;
+    gap: clamp(1.5rem, 4vw, 5rem);
+    align-items: center;
+    min-height: 25rem;
+    padding: 3rem 1.25rem;
+    color: inherit;
+    background: var(--row-bg);
+    text-decoration: none;
+    transition:
+      color 200ms ease,
+      background 200ms ease;
+  }
+
+  .concept-row__number,
+  .concept-row__copy > p,
+  .concept-row__open {
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .concept-row__number {
+    align-self: start;
+    color: var(--row-accent);
+  }
+
+  .concept-row__copy > p {
+    margin: 0 0 1rem;
+    color: var(--row-accent);
+  }
+
+  .concept-row h2 {
+    margin: 0 0 1.5rem;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 5.8rem);
+    font-weight: 520;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .concept-row__copy strong,
+  .concept-row__copy > span {
+    display: block;
+    max-width: 39rem;
+  }
+
+  .concept-row__copy strong {
+    margin-bottom: 0.9rem;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+    font-weight: 550;
+    line-height: 1.25;
+  }
+
+  .concept-row__copy > span {
+    color: #536057;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .concept-row__preview {
+    position: relative;
+    min-height: 15rem;
+    overflow: hidden;
+    color: #f2eee4;
+    background: #243f33;
+  }
+
+  .preview-name,
+  .preview-title {
+    position: absolute;
+    font-family: "Fraunces Variable", Georgia, serif;
+  }
+
+  .preview-name {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .preview-line {
+    position: absolute;
+    top: 2.7rem;
+    right: 1rem;
+    left: 1rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .preview-title {
+    bottom: 1.25rem;
+    left: 1rem;
+    font-size: clamp(2rem, 3vw, 3.3rem);
+    font-weight: 450;
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+  }
+
+  .preview-dot {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    width: 1rem;
+    height: 1rem;
+    background: #c75836;
+    border-radius: 50%;
+  }
+
+  .concept-row__open {
+    writing-mode: vertical-rl;
+  }
+
+  .concept-row--working-studio {
+    --row-accent: #d1491f;
+  }
+
+  .concept-row--working-studio .concept-row__preview {
+    color: #171717;
+    background: #f2b705;
+    border: 8px solid #171717;
+    font-family: Impact, "Arial Narrow", sans-serif;
+    transform: rotate(-1.5deg);
+  }
+
+  .concept-row--working-studio .preview-title {
+    font-family: Impact, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+  }
+
+  .concept-row--working-studio .preview-dot {
+    background: #171717;
+    border-radius: 0;
+  }
+
+  .concept-row--signal-office {
+    --row-accent: #e02f25;
+  }
+
+  .concept-row--signal-office .concept-row__preview {
+    color: #111;
+    background:
+      linear-gradient(90deg, transparent 49.7%, #d8d8d8 50%, transparent 50.3%),
+      #f8f8f5;
+    border-top: 1rem solid #e02f25;
+  }
+
+  .concept-row--signal-office .preview-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.075em;
+  }
+
+  .concept-row--signal-office .preview-dot {
+    background: #e02f25;
+    border-radius: 0;
+  }
+
+  .concept-row--wonder-cabinet {
+    --row-accent: #1c59c8;
+  }
+
+  .concept-row--wonder-cabinet .concept-row__preview {
+    color: #34210f;
+    background: #efafc1;
+    border: 4px solid #34210f;
+    border-radius: 50% 50% 0.8rem 0.8rem;
+    transform: rotate(1.8deg);
+  }
+
+  .concept-row--wonder-cabinet .preview-title {
+    font-family: Rockwell, "Courier New", serif;
+  }
+
+  .concept-row--wonder-cabinet .preview-dot {
+    width: 2rem;
+    height: 2rem;
+    background: #f4c42d;
+    border: 3px solid #34210f;
+  }
+
+  .concept-row--night-school {
+    --row-accent: #9c712e;
+  }
+
+  .concept-row--night-school .concept-row__preview {
+    color: #eee7d9;
+    background: #151a1c;
+    box-shadow: inset 0 0 0 1px #9c712e;
+  }
+
+  .concept-row--night-school .preview-title {
+    font-family: "Iowan Old Style", Baskerville, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .concept-row--night-school .preview-dot {
+    background: #9c712e;
+  }
+
+  .concept-row > a:hover {
+    color: #f4efe5;
+    background: #1d211e;
+  }
+
+  .concept-row > a:hover .concept-row__copy > span {
+    color: #bdc5bf;
+  }
+
+  .gallery__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0 7rem;
+    font-size: 0.82rem;
+  }
+
+  .gallery__footer p {
+    margin: 0;
+  }
+
+  .gallery__footer a {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .gallery__header {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      min-height: auto;
+      padding-top: 6rem;
+    }
+
+    .concept-row > a {
+      grid-template-columns: 2.5rem 1fr;
+    }
+
+    .concept-row__preview {
+      grid-column: 2;
+    }
+
+    .concept-row__open {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .gallery {
+      padding: 1.25rem;
+    }
+
+    .concept-row > a {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-inline: 0;
+    }
+
+    .concept-row__number,
+    .concept-row__preview {
+      grid-column: 1;
+    }
+
+    .gallery__footer {
+      flex-direction: column;
+    }
+  }
+</style>

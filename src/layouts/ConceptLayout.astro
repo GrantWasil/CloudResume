@@ -1,0 +1,133 @@
+---
+import "@fontsource-variable/fraunces/wght.css";
+import "@fontsource-variable/public-sans/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+import DesignSwitcher from "../components/DesignSwitcher.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  current: string;
+  themeColor?: string;
+  preview?: boolean;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  current,
+  themeColor = "#171817",
+  preview = true,
+  image = "/grant-wasil-1600.webp",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site).toString();
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Grant Wasil",
+  url: "https://grantwasil.com",
+  jobTitle: "AI Integration Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Gary Community Ventures",
+    url: "https://garycommunity.org",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/grant-wasil/",
+    "https://github.com/GrantWasil",
+    "https://x.com/GrantWasil",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={themeColor} />
+    {preview && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {!preview && <link rel="canonical" href={canonicalURL} />}
+    {!preview && <meta property="og:type" content="website" />}
+    {!preview && <meta property="og:url" content={canonicalURL} />}
+    {!preview && <meta property="og:title" content={title} />}
+    {!preview && <meta property="og:description" content={description} />}
+    {!preview && <meta property="og:image" content={socialImage} />}
+    {!preview && <meta property="og:image:alt" content="Portrait of Grant Wasil" />}
+    {!preview && <meta name="twitter:card" content="summary_large_image" />}
+    {!preview && <meta name="twitter:title" content={title} />}
+    {!preview && <meta name="twitter:description" content={description} />}
+    {!preview && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    <title>{preview ? `${title} — Grant Wasil design concept` : title}</title>
+  </head>
+  <body>
+    <a class="concept-skip" href="#main-content">Skip to main content</a>
+    <slot />
+    {preview && <DesignSwitcher current={current} />}
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    text-rendering: optimizeLegibility;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .concept-skip {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 2000;
+    padding: 0.65rem 0.9rem;
+    color: #fff;
+    background: #111;
+    font: 700 0.75rem/1 Arial, sans-serif;
+    text-decoration: none;
+    transform: translateY(-180%);
+  }
+
+  .concept-skip:focus {
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

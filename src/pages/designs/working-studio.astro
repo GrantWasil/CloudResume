@@ -1,0 +1,882 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { practices, selectedWork } from "../../data/designContent";
+---
+
+<ConceptLayout
+  title="Working Studio"
+  description="A tactile, builder-led design direction for Grant Wasil"
+  current="working-studio"
+  themeColor="#f0b90b"
+>
+  <header class="studio-header">
+    <a class="studio-logo" href="/designs/working-studio/">
+      <span>GW</span>
+      <strong>WORKING<br />STUDIO</strong>
+    </a>
+    <p>Strategy made tangible<br />Littleton, CO</p>
+    <nav aria-label="Concept navigation">
+      <a href="#method">Method</a>
+      <a href="#proof">Proof</a>
+      <a href="#person">Person</a>
+    </nav>
+    <a class="studio-hire" href="#contact">Start a conversation</a>
+  </header>
+
+  <main id="main-content">
+    <section class="studio-hero" aria-labelledby="studio-title">
+      <div class="studio-hero__rail" aria-hidden="true">
+        <span>AI / ORG CHANGE / SYSTEMS</span>
+        <span>ISSUE 01 — 2026</span>
+      </div>
+      <div class="studio-hero__copy">
+        <div class="studio-role">
+          <span>Grant Wasil</span>
+          <span>AI Integration Engineer</span>
+        </div>
+        <h1 id="studio-title">MAKE<br />THE IDEA<br /><em>WORK.</em></h1>
+        <p>
+          I help leaders turn AI possibility into sound direction, stronger
+          human capability, and systems that hold up in the real world.
+        </p>
+        <a href="#proof">See what that means <span>↘</span></a>
+      </div>
+      <div class="studio-hero__board">
+        <figure>
+          <img
+            src="/grant-wasil-800.webp"
+            width="800"
+            height="534"
+            alt="Grant Wasil smiling in a sunlit office"
+          />
+          <figcaption>Close to the work / close to the people</figcaption>
+        </figure>
+        <div class="studio-tape studio-tape--one" aria-hidden="true"></div>
+        <div class="studio-tape studio-tape--two" aria-hidden="true"></div>
+        <p class="studio-note studio-note--one">Not an<br />AI rollout.</p>
+        <p class="studio-note studio-note--two">A redesign<br />of how work<br />gets done.</p>
+        <span class="studio-stamp">BUILT<br />WITH<br />PEOPLE</span>
+      </div>
+      <div class="studio-hero__ticker">
+        <span>FIND THE LEVERAGE</span>
+        <span>DESIGN THE WHOLE CHANGE</span>
+        <span>BUILD CAPABILITY</span>
+        <span>SHIP SOMETHING USEFUL</span>
+      </div>
+    </section>
+
+    <section class="studio-method" id="method" aria-labelledby="studio-method-title">
+      <header>
+        <span>THE METHOD / 3 MOVES</span>
+        <h2 id="studio-method-title">No black boxes.<br />No theater.</h2>
+      </header>
+      <ol>
+        {practices.map((item) => (
+          <li>
+            <span class="studio-method__number">{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <span class="studio-method__mark" aria-hidden="true">＋</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="studio-callout">
+      <p>THE BRIEF</p>
+      <blockquote>
+        “The hardest AI work lives between a compelling demo and a dependable
+        way of working.”
+      </blockquote>
+      <span>THAT’S THE PART I LIKE.</span>
+    </section>
+
+    <section class="studio-proof" id="proof" aria-labelledby="studio-proof-title">
+      <header>
+        <span>SELECTED OUTPUT / 01—03</span>
+        <h2 id="studio-proof-title">Proof is a verb.</h2>
+      </header>
+      <div class="studio-proof__wall">
+        {selectedWork.map((item, index) => (
+          <article class:list={[`studio-proof__item`, `studio-proof__item--${index + 1}`]}>
+            <a href={item.href}>
+              <div class="studio-proof__meta">
+                <span>{item.number}</span>
+                <span>{item.type}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <strong>Open the work ↗</strong>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="studio-person" id="person" aria-labelledby="studio-person-title">
+      <div class="studio-person__sidebar">
+        <span>THE HUMAN IN THE LOOP</span>
+        <strong>GW</strong>
+      </div>
+      <div class="studio-person__copy">
+        <h2 id="studio-person-title">Systems builder.<br />Curious host.<br />Person who brings the game.</h2>
+        <div>
+          <p>
+            I came to AI through customer work, web development, election
+            operations, and site reliability engineering. Each chapter taught
+            me that technology matters when it helps people make better
+            decisions and do stronger work.
+          </p>
+          <p>
+            Beyond work: board games, immersive experiences, Colorado mountain
+            air, and making spaces where curious people learn together.
+          </p>
+        </div>
+      </div>
+      <aside>
+        <span>WORKING PRINCIPLE</span>
+        <p>Stay close enough to implementation that reality gets a vote.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="studio-footer" id="contact">
+    <p>GOT A MESSY AI QUESTION?</p>
+    <h2>LET’S PUT IT<br />ON THE WALL.</h2>
+    <a href="mailto:dev@grantwasil.com">DEV@GRANTWASIL.COM ↗</a>
+    <div>
+      <span>© 2026 GRANT WASIL</span>
+      <span>LINKEDIN / GITHUB / X</span>
+      <span>BUILT IN COLORADO</span>
+    </div>
+  </footer>
+</ConceptLayout>
+
+<style>
+  :global(body) {
+    --black: #171717;
+    --cream: #f1ead9;
+    --yellow: #f0b90b;
+    --orange: #e24b1b;
+    --blue: #2149c5;
+    color: var(--black);
+    background: var(--cream);
+    font-family: "Public Sans Variable", Arial, sans-serif;
+  }
+
+  :global(::selection) {
+    color: var(--cream);
+    background: var(--blue);
+  }
+
+  :global(a:focus-visible) {
+    outline: 4px solid var(--blue);
+    outline-offset: 4px;
+  }
+
+  .studio-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto auto;
+    gap: 2rem;
+    align-items: center;
+    min-height: 6.6rem;
+    padding: 0.8rem clamp(1rem, 3vw, 3rem);
+    color: var(--cream);
+    background: var(--black);
+    border-bottom: 0.55rem solid var(--yellow);
+  }
+
+  .studio-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: max-content;
+    color: inherit;
+    font-family: Impact, "Arial Narrow", sans-serif;
+    letter-spacing: 0.035em;
+    line-height: 0.8;
+    text-decoration: none;
+  }
+
+  .studio-logo > span {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    place-items: center;
+    color: var(--black);
+    background: var(--yellow);
+    font-size: 1.6rem;
+  }
+
+  .studio-logo strong {
+    font-size: 1rem;
+  }
+
+  .studio-header > p {
+    margin: 0;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.6rem;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .studio-header nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .studio-header nav a,
+  .studio-hire {
+    color: inherit;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .studio-hire {
+    padding: 0.9rem 1rem;
+    color: var(--black);
+    background: var(--cream);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  blockquote,
+  figure {
+    margin-top: 0;
+  }
+
+  .studio-hero {
+    display: grid;
+    grid-template-areas:
+      "rail copy board"
+      "ticker ticker ticker";
+    grid-template-columns: 3.4rem minmax(0, 1fr) minmax(27rem, 0.82fr);
+    min-height: calc(100svh - 6.6rem);
+    background: var(--yellow);
+    border-bottom: 0.65rem solid var(--black);
+  }
+
+  .studio-hero__rail {
+    display: flex;
+    grid-area: rail;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    color: var(--cream);
+    background: var(--orange);
+    border-right: 0.25rem solid var(--black);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    writing-mode: vertical-rl;
+  }
+
+  .studio-hero__copy {
+    display: flex;
+    grid-area: copy;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(3.5rem, 7vw, 7rem) clamp(1.5rem, 4vw, 4.5rem);
+  }
+
+  .studio-role {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.65rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 3px solid var(--black);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .studio-hero h1,
+  .studio-method h2,
+  .studio-proof h2,
+  .studio-person h2,
+  .studio-footer h2 {
+    margin-bottom: 2rem;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: 800;
+    line-height: 0.78;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+
+  .studio-hero h1 {
+    font-size: clamp(5.3rem, 10.5vw, 13rem);
+  }
+
+  .studio-hero h1 em {
+    color: var(--orange);
+    font-style: normal;
+    -webkit-text-stroke: 3px var(--black);
+  }
+
+  .studio-hero__copy > p {
+    max-width: 37rem;
+    margin-bottom: 2rem;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 520;
+    line-height: 1.3;
+  }
+
+  .studio-hero__copy > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100%, 23rem);
+    padding: 1rem;
+    color: var(--cream);
+    background: var(--black);
+    box-shadow: 0.45rem 0.45rem 0 var(--orange);
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 130ms ease;
+  }
+
+  .studio-hero__copy > a:hover {
+    transform: translate(0.25rem, 0.25rem);
+  }
+
+  .studio-hero__board {
+    position: relative;
+    grid-area: board;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(23, 23, 23, 0.08) 1px, transparent 1px),
+      linear-gradient(rgba(23, 23, 23, 0.08) 1px, transparent 1px),
+      var(--cream);
+    background-size: 2rem 2rem;
+    border-left: 0.25rem solid var(--black);
+  }
+
+  .studio-hero__board figure {
+    position: absolute;
+    top: 15%;
+    right: 6%;
+    left: 8%;
+    padding: 0.8rem 0.8rem 2.7rem;
+    margin: 0;
+    background: #fffdf4;
+    box-shadow: 0.8rem 0.8rem 0 rgba(23, 23, 23, 0.18);
+    transform: rotate(2.4deg);
+  }
+
+  .studio-hero__board img {
+    width: 100%;
+    min-height: 24rem;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  .studio-hero__board figcaption {
+    padding: 0.85rem 0.25rem 0;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .studio-tape {
+    position: absolute;
+    z-index: 2;
+    width: 8rem;
+    height: 2.2rem;
+    background: rgba(240, 185, 11, 0.83);
+  }
+
+  .studio-tape--one {
+    top: 12%;
+    left: 4%;
+    transform: rotate(-8deg);
+  }
+
+  .studio-tape--two {
+    right: 2%;
+    bottom: 18%;
+    background: rgba(226, 75, 27, 0.82);
+    transform: rotate(13deg);
+  }
+
+  .studio-note {
+    position: absolute;
+    z-index: 3;
+    padding: 0.8rem;
+    margin: 0;
+    color: var(--cream);
+    background: var(--blue);
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 650;
+    line-height: 1.05;
+    transform: rotate(-4deg);
+  }
+
+  .studio-note--one {
+    top: 5%;
+    right: 3%;
+  }
+
+  .studio-note--two {
+    bottom: 6%;
+    left: 3%;
+    color: var(--black);
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    transform: rotate(3deg);
+  }
+
+  .studio-stamp {
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+    z-index: 4;
+    display: grid;
+    width: 6.2rem;
+    height: 6.2rem;
+    place-items: center;
+    color: var(--orange);
+    border: 5px solid currentColor;
+    border-radius: 50%;
+    font: 800 0.75rem/0.9 Impact, "Arial Narrow", sans-serif;
+    text-align: center;
+    transform: rotate(11deg);
+  }
+
+  .studio-hero__ticker {
+    display: flex;
+    grid-area: ticker;
+    justify-content: space-around;
+    gap: 2rem;
+    overflow: hidden;
+    padding: 1rem;
+    color: var(--cream);
+    background: var(--black);
+    border-top: 0.25rem solid var(--black);
+    font: 800 0.78rem/1 "JetBrains Mono Variable", monospace;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .studio-hero__ticker span::before {
+    margin-right: 2rem;
+    color: var(--yellow);
+    content: "✳";
+  }
+
+  .studio-method {
+    display: grid;
+    grid-template-columns: minmax(20rem, 0.75fr) minmax(0, 1.25fr);
+    gap: 4rem;
+    padding: clamp(5rem, 9vw, 9rem) clamp(1rem, 4vw, 5rem);
+    border-bottom: 0.65rem solid var(--black);
+  }
+
+  .studio-method header > span,
+  .studio-proof header > span,
+  .studio-person__sidebar > span {
+    display: block;
+    margin-bottom: 1.5rem;
+    font-family: "JetBrains Mono Variable", monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+  }
+
+  .studio-method h2,
+  .studio-proof h2 {
+    font-size: clamp(4rem, 7vw, 8rem);
+  }
+
+  .studio-method ol {
+    padding: 0;
+    margin: 0;
+    border-top: 4px solid var(--black);
+    list-style: none;
+  }
+
+  .studio-method li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4rem minmax(12rem, 0.8fr) minmax(16rem, 1.2fr) 2rem;
+    gap: 1.5rem;
+    align-items: center;
+    min-height: 10rem;
+    padding: 1.5rem 0;
+    border-bottom: 2px solid var(--black);
+  }
+
+  .studio-method__number {
+    color: var(--orange);
+    font: 800 2.5rem/1 Impact, "Arial Narrow", sans-serif;
+  }
+
+  .studio-method h3 {
+    margin: 0;
+    font: 800 clamp(1.8rem, 3vw, 3rem)/0.9 Impact, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+  }
+
+  .studio-method li p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .studio-method__mark {
+    color: var(--orange);
+    font-size: 2rem;
+  }
+
+  .studio-callout {
+    display: grid;
+    grid-template-columns: 8rem 1fr auto;
+    gap: 3rem;
+    align-items: start;
+    padding: clamp(4rem, 8vw, 8rem) clamp(1rem, 5vw, 6rem);
+    color: var(--cream);
+    background: var(--blue);
+    border-bottom: 0.65rem solid var(--black);
+  }
+
+  .studio-callout > p,
+  .studio-callout > span {
+    margin: 0;
+    font: 700 0.64rem/1.3 "JetBrains Mono Variable", monospace;
+    letter-spacing: 0.07em;
+  }
+
+  .studio-callout blockquote {
+    max-width: 23ch;
+    margin-bottom: 0;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 6.2rem);
+    font-weight: 580;
+    line-height: 0.97;
+    letter-spacing: -0.045em;
+  }
+
+  .studio-callout > span {
+    padding: 0.8rem;
+    color: var(--black);
+    background: var(--yellow);
+    transform: rotate(4deg);
+  }
+
+  .studio-proof {
+    padding: clamp(5rem, 9vw, 9rem) clamp(1rem, 4vw, 5rem);
+    background: var(--yellow);
+    border-bottom: 0.65rem solid var(--black);
+  }
+
+  .studio-proof header {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+
+  .studio-proof__wall {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+  }
+
+  .studio-proof__item {
+    grid-column: span 4;
+    background: var(--cream);
+    border: 4px solid var(--black);
+    box-shadow: 0.65rem 0.65rem 0 var(--black);
+  }
+
+  .studio-proof__item--2 {
+    margin-top: 4rem;
+    color: var(--cream);
+    background: var(--orange);
+    transform: rotate(1.2deg);
+  }
+
+  .studio-proof__item--3 {
+    margin-top: -1.5rem;
+    color: var(--cream);
+    background: var(--black);
+    transform: rotate(-1deg);
+  }
+
+  .studio-proof__item a {
+    display: flex;
+    min-height: 28rem;
+    flex-direction: column;
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .studio-proof__meta {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid currentColor;
+    font: 700 0.6rem/1 "JetBrains Mono Variable", monospace;
+    text-transform: uppercase;
+  }
+
+  .studio-proof h3 {
+    margin-bottom: 1.5rem;
+    font: 800 clamp(2.4rem, 4vw, 4.4rem)/0.86 Impact, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+  }
+
+  .studio-proof__item p {
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .studio-proof__item strong {
+    padding-top: 1.5rem;
+    margin-top: auto;
+    border-top: 2px solid currentColor;
+    font: 700 0.68rem/1 "JetBrains Mono Variable", monospace;
+    text-transform: uppercase;
+  }
+
+  .studio-person {
+    display: grid;
+    grid-template-columns: 9rem 1fr minmax(18rem, 0.35fr);
+    border-bottom: 0.65rem solid var(--black);
+  }
+
+  .studio-person__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.5rem;
+    color: var(--cream);
+    background: var(--orange);
+  }
+
+  .studio-person__sidebar > span {
+    writing-mode: vertical-rl;
+  }
+
+  .studio-person__sidebar strong {
+    font: 800 4rem/0.8 Impact, "Arial Narrow", sans-serif;
+  }
+
+  .studio-person__copy {
+    padding: clamp(5rem, 8vw, 9rem) clamp(2rem, 6vw, 7rem);
+  }
+
+  .studio-person h2 {
+    max-width: 13ch;
+    font-size: clamp(4rem, 7vw, 8rem);
+  }
+
+  .studio-person__copy > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 55rem;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+
+  .studio-person aside {
+    padding: 3rem 2rem;
+    color: var(--cream);
+    background: var(--black);
+  }
+
+  .studio-person aside span {
+    font: 700 0.62rem/1 "JetBrains Mono Variable", monospace;
+    letter-spacing: 0.06em;
+  }
+
+  .studio-person aside p {
+    margin-top: 4rem;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: 1.7rem;
+    line-height: 1.2;
+  }
+
+  .studio-footer {
+    min-height: 80svh;
+    padding: clamp(5rem, 10vw, 10rem) clamp(1rem, 5vw, 6rem) 7rem;
+    color: var(--black);
+    background: var(--orange);
+  }
+
+  .studio-footer > p {
+    font: 700 0.7rem/1 "JetBrains Mono Variable", monospace;
+    letter-spacing: 0.07em;
+  }
+
+  .studio-footer h2 {
+    max-width: 11ch;
+    font-size: clamp(5rem, 12vw, 14rem);
+  }
+
+  .studio-footer > a {
+    display: inline-block;
+    padding: 1rem 1.2rem;
+    color: var(--black);
+    background: var(--yellow);
+    border: 4px solid var(--black);
+    box-shadow: 0.6rem 0.6rem 0 var(--black);
+    font: 700 clamp(0.8rem, 1.4vw, 1.1rem)/1 "JetBrains Mono Variable", monospace;
+    text-decoration: none;
+  }
+
+  .studio-footer > div {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5rem;
+    margin-top: 7rem;
+    border-top: 3px solid var(--black);
+    font: 700 0.6rem/1 "JetBrains Mono Variable", monospace;
+  }
+
+  @media (max-width: 980px) {
+    .studio-header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .studio-header > p,
+    .studio-header nav {
+      display: none;
+    }
+
+    .studio-hero {
+      grid-template-areas:
+        "rail copy"
+        "rail board"
+        "ticker ticker";
+      grid-template-columns: 3.2rem 1fr;
+    }
+
+    .studio-hero__board {
+      min-height: 45rem;
+      border-top: 0.25rem solid var(--black);
+      border-left: 0;
+    }
+
+    .studio-method {
+      grid-template-columns: 1fr;
+    }
+
+    .studio-proof__item {
+      grid-column: span 6;
+    }
+
+    .studio-proof__item--3 {
+      margin-top: 1rem;
+    }
+
+    .studio-person {
+      grid-template-columns: 6rem 1fr;
+    }
+
+    .studio-person aside {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .studio-hire {
+      padding: 0.7rem;
+      font-size: 0.55rem;
+    }
+
+    .studio-hero__rail {
+      display: none;
+    }
+
+    .studio-hero {
+      grid-template-areas:
+        "copy"
+        "board"
+        "ticker";
+      grid-template-columns: 1fr;
+    }
+
+    .studio-hero__copy {
+      padding: 4rem 1.25rem;
+    }
+
+    .studio-method li {
+      grid-template-columns: 2.5rem 1fr 1.5rem;
+    }
+
+    .studio-method li p {
+      display: none;
+    }
+
+    .studio-callout {
+      grid-template-columns: 1fr;
+    }
+
+    .studio-proof header {
+      display: block;
+    }
+
+    .studio-proof__wall {
+      display: block;
+    }
+
+    .studio-proof__item {
+      margin: 0 0 1.5rem;
+      transform: none;
+    }
+
+    .studio-person {
+      display: block;
+    }
+
+    .studio-person__sidebar {
+      min-height: 6rem;
+      flex-direction: row;
+    }
+
+    .studio-person__sidebar > span {
+      writing-mode: horizontal-tb;
+    }
+
+    .studio-person__copy {
+      padding: 4rem 1.25rem;
+    }
+
+    .studio-person__copy > div {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .studio-person aside {
+      min-height: 20rem;
+    }
+
+    .studio-footer > div {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>
