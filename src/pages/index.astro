@@ -17,7 +17,7 @@ import "@fontsource-variable/public-sans/wght.css";
   </head>
   <body>
     <main>
-      <h1>Grant Wasil</h1>
+      <header class="identity"><span class="logo" aria-hidden="true"><img src="/gwlogo.png" alt="" width="1536" height="1024" /></span><h1>Grant Wasil</h1></header>
       <p>I build software and help people use AI to make their lives better.</p>
       <p>At Gary Community Ventures, that means listening to what people are trying to do, experimenting with models, and building tools or helping them find a better way to work. I also run demos and office hours where we try things together. Before Gary, I was a site reliability engineer at Duo Security / Cisco.</p>
       <nav aria-label="Contact and profiles">
@@ -56,7 +56,10 @@ import "@fontsource-variable/public-sans/wght.css";
   :global(*) { box-sizing: border-box; }
   :global(body) { margin: 0; background: #fff; color: #252525; font-family: "Public Sans Variable", Arial, sans-serif; font-size: 16px; line-height: 1.65; }
   main { max-width: 690px; margin: 0 auto; padding: 64px 28px 72px; }
-  h1 { margin: 0 0 20px; font-size: 28px; line-height: 1.25; font-weight: 650; letter-spacing: -.035em; }
+  .identity { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .logo { display: block; position: relative; width: 60px; height: 36px; overflow: hidden; flex: 0 0 60px; }
+  .logo img { display: block; position: absolute; width: 112px; height: auto; max-width: none; left: -29px; top: -23px; }
+  h1 { margin: 0; font-size: 28px; line-height: 1.25; font-weight: 650; letter-spacing: -.035em; }
   h2 { margin: 38px 0 20px; font-size: 18px; font-weight: 650; line-height: 1.4; }
   h3 { margin: 0 0 5px; font-size: 16px; font-weight: 650; line-height: 1.5; }
   p { margin: 0 0 16px; }

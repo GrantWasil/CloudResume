@@ -6,7 +6,7 @@ const dist = path.resolve(process.argv[2] ?? fileURLToPath(new URL("../dist/", i
 const files = await readdir(dist, { recursive: true, withFileTypes: true });
 const relativeFiles = files.filter(entry => entry.isFile()).map(entry => path.relative(dist, path.join(entry.parentPath, entry.name)));
 const pages = ["index.html", "404.html", "notes/from-prompts-to-systems/index.html", "work/organizational-ai-integration/index.html", "work/reliability-as-a-foundation/index.html"];
-const publicFiles = new Set([...pages, "favicon.svg", "robots.txt", "sitemap-index.xml", "sitemap-0.xml"]);
+const publicFiles = new Set([...pages, "favicon.svg", "gwlogo.png", "robots.txt", "sitemap-index.xml", "sitemap-0.xml"]);
 const errors: string[] = [];
 for (const file of relativeFiles) {
   if (!publicFiles.has(file) && !/^_astro\/[^/]+\.(css|woff2?)$/.test(file)) errors.push(`Unexpected deploy artifact: ${file}`);
