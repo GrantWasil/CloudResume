@@ -1,6 +1,6 @@
 # grantwasil.com
 
-Grant Wasil’s personal website: a public proof layer for strategic AI implementation, organizational adoption, reliable workflows, and agentic systems.
+Grant Wasil’s personal website: a short introduction, selected software and systems work, and contact links.
 
 ## Local development
 
@@ -14,9 +14,11 @@ bun run dev
 ```sh
 bun run check
 bun run build
+bun run verify:build
 ```
 
 The production build is generated in `dist/` as a static site.
+Only the homepage, a not-found page, three legacy article redirects, and their required public assets are deployable. Design comparisons and private career notes are not part of this repository's build. The verifier enforces that artifact boundary.
 
 ## Deployment boundary
 

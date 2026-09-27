@@ -1,5 +1,68 @@
 ---
-import FieldGuide from "./designs/field-guide.astro";
+import "@fontsource-variable/public-sans/wght.css";
 ---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Grant Wasil builds software and helps people use AI to make their lives better. Selected projects and systems work." />
+    <link rel="canonical" href="https://grantwasil.com/" />
+    <meta property="og:title" content="Grant Wasil" />
+    <meta property="og:description" content="I build software and help people use AI to make their lives better." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://grantwasil.com/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Grant Wasil</title>
+  </head>
+  <body>
+    <main>
+      <h1>Grant Wasil</h1>
+      <p>I build software and help people use AI to make their lives better.</p>
+      <p>At Gary Community Ventures, that means listening to what people are trying to do, experimenting with models, and building tools or helping them find a better way to work. I also run demos and office hours where we try things together. Before Gary, I was a site reliability engineer at Duo Security / Cisco.</p>
+      <nav aria-label="Contact and profiles">
+        <a href="mailto:dev@grantwasil.com">Email</a>
+        <a href="https://github.com/GrantWasil">GitHub</a>
+        <a href="https://www.linkedin.com/in/grant-wasil/">LinkedIn</a>
+        <a href="https://x.com/GrantWasil">X</a>
+      </nav>
 
-<FieldGuide isPreview={false} />
+      <section aria-labelledby="work">
+        <h2 id="work">Some work</h2>
+        <article>
+          <h3><a href="https://paintr.dev">paintr</a></h3>
+          <p>An iPhone and iPad app I built that turns your own images into paint-by-number puzzles. It started with my wife’s love of paint-by-number, and it’s made for taking your time with a painting.</p>
+          <p class="links"><a href="https://apps.apple.com/us/app/paintr-a-little-color/id6808892551">App Store</a> · <a href="https://paintr.dev">Website</a></p>
+        </article>
+        <article>
+          <h3><a href="https://github.com/GrantWasil/crewview">crewview</a></h3>
+          <p>A tool I built to delegate work from Codex to Claude and keep track of the resulting jobs and conversations.</p>
+        </article>
+        <article>
+          <h3>AWS rollout automation at Duo Security / Cisco</h3>
+          <p>I automated a recurring operating-system patch rollout so it could begin when new hardened images became available. The system rolled changes through AWS infrastructure in stages, using service health checks and time between stages to catch failures.</p>
+        </article>
+      </section>
+
+      <p class="personal">I’m based in Colorado. I like board games, escape rooms, and murder mystery parties.</p>
+    </main>
+  </body>
+</html>
+<style>
+  :global(*) { box-sizing: border-box; }
+  :global(body) { margin: 0; background: #fff; color: #252525; font-family: "Public Sans Variable", Arial, sans-serif; font-size: 16px; line-height: 1.65; }
+  main { max-width: 690px; margin: 0 auto; padding: 64px 28px 72px; }
+  h1 { margin: 0 0 20px; font-size: 28px; line-height: 1.25; font-weight: 650; letter-spacing: -.035em; }
+  h2 { margin: 38px 0 20px; font-size: 18px; font-weight: 650; line-height: 1.4; }
+  h3 { margin: 0 0 5px; font-size: 16px; font-weight: 650; line-height: 1.5; }
+  p { margin: 0 0 16px; }
+  a { color: #245399; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { color: #153466; }
+  a:focus-visible { outline: 2px solid #245399; outline-offset: 4px; border-radius: 1px; }
+  nav { display: flex; flex-wrap: wrap; column-gap: 18px; row-gap: 8px; }
+  article + article { margin-top: 26px; }
+  article p { margin-bottom: 8px; }
+  .links { font-size: 14px; }
+  .personal { margin-top: 36px; color: #505050; }
+  @media (max-width: 520px) { main { padding: 36px 22px 48px; } }
+</style>
