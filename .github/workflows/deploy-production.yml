@@ -134,3 +134,11 @@ jobs:
               --retry 5 --retry-all-errors \
               "https://grantwasil.com${route}" > /dev/null
           done
+          curl --fail --silent --show-error \
+            --retry 5 --retry-all-errors \
+            "https://grantwasil.com/" > /tmp/grantwasil-homepage.html
+          grep -Fq "I build software and help people use AI to make their lives better." /tmp/grantwasil-homepage.html
+          if grep -Fq "Read the terrain" /tmp/grantwasil-homepage.html; then
+            echo "::error::The old homepage is still being served."
+            exit 1
+          fi

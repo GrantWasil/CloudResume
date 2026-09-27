@@ -7,7 +7,7 @@ The production site is a static Astro build delivered by the existing Amazon S3,
 1. A pull request targeting `main` runs the Astro checks and produces a build artifact.
 2. A merge to `main` repeats those checks.
 3. If the AWS repository variables are absent, the workflow reports that deployment is not configured and stops safely.
-4. If the variables exist, the protected `production` environment must approve the deployment.
+4. If the variables exist, the `production` environment permits deployment from `main`. On September 26, 2026 it had no required-reviewer rule, so merging to `main` is the publication action; do not expect an additional approval screen.
 5. GitHub authenticates to AWS with a short-lived OIDC credential, syncs `dist/` to S3, invalidates CloudFront, and smoke-tests every public route.
 
 No permanent AWS access key is stored in GitHub.
@@ -52,9 +52,9 @@ The environment name and branch restriction are security controls. The AWS role 
 
 1. Merge the reviewed pull request into `main`.
 2. Open the **Build and deploy production** workflow run.
-3. Review and approve the `production` deployment.
+3. Monitor the `production` deployment. It currently has no separate required-reviewer gate.
 4. Confirm that the smoke-test job passes.
-5. Check the homepage, each article route, the contact links, and the generated sitemap in a browser.
+5. Check the approved homepage, legacy article redirects, contact links, and homepage-only sitemap in a browser. The build verifier rejects preview/design pages and unexpected files before upload. S3 sync uses `--delete`, so old comparison files will be removed from the deployed bucket.
 
 ## Cache behavior
 

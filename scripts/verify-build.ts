@@ -2,82 +2,64 @@ import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const dist = path.join(root, "dist");
-const htmlFiles = (await readdir(dist, { recursive: true })).filter((file) =>
-  file.endsWith(".html"),
-);
-
-const expectedRoutes = [
-  "index.html",
-  "notes/from-prompts-to-systems/index.html",
-  "work/organizational-ai-integration/index.html",
-  "work/reliability-as-a-foundation/index.html",
-];
-
-const deniedPhrases = [
-  "myspark",
-  "thought leader",
-  "director of ai",
-  "partner-participation",
-  "platform & gen ai specialist",
-  "you are visitor number",
-];
-
+const dist = path.resolve(process.argv[2] ?? fileURLToPath(new URL("../dist/", import.meta.url)));
+const files = await readdir(dist, { recursive: true, withFileTypes: true });
+const relativeFiles = files.filter(entry => entry.isFile()).map(entry => path.relative(dist, path.join(entry.parentPath, entry.name)));
+const pages = ["index.html", "404.html", "notes/from-prompts-to-systems/index.html", "work/organizational-ai-integration/index.html", "work/reliability-as-a-foundation/index.html"];
+const publicFiles = new Set([...pages, "favicon.svg", "robots.txt", "sitemap-index.xml", "sitemap-0.xml"]);
 const errors: string[] = [];
-
-for (const route of expectedRoutes) {
-  if (!htmlFiles.includes(route)) errors.push(`Missing expected route: ${route}`);
+for (const file of relativeFiles) {
+  if (!publicFiles.has(file) && !/^_astro\/[^/]+\.(css|woff2?)$/.test(file)) errors.push(`Unexpected deploy artifact: ${file}`);
 }
+for (const file of publicFiles) if (!relativeFiles.includes(file)) errors.push(`Missing deploy artifact: ${file}`);
 
-for (const file of htmlFiles) {
-  const absoluteFile = path.join(dist, file);
-  const html = await readFile(absoluteFile, "utf8");
-  const lower = html.toLowerCase();
-
+for (const file of pages) {
+  if (!relativeFiles.includes(file)) continue;
+  const html = await readFile(path.join(dist, file), "utf8");
   if (!/<title>[^<]+<\/title>/.test(html)) errors.push(`${file}: missing title`);
-  if (!/<meta name="description" content="[^"]+">/.test(html)) {
-    errors.push(`${file}: missing meta description`);
+  if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${file}: missing description`);
+  for (const phrase of ["Read the terrain", "Cap Query", "GovCloud", "air-gapped", "Caleb", "compensation decrease", "/previews/", "/designs/", "AI Integration Engineer"]) {
+    if (html.toLowerCase().includes(phrase.toLowerCase())) errors.push(`${file}: excluded content ${phrase}`);
   }
-  if (!lower.includes("ai integration engineer")) {
-    errors.push(`${file}: current role is not present`);
-  }
-
-  for (const phrase of deniedPhrases) {
-    if (lower.includes(phrase)) errors.push(`${file}: denied phrase found: ${phrase}`);
-  }
-
-  const references = html.matchAll(/(?:href|src)="([^"]+)"/g);
-  for (const match of references) {
-    const reference = match[1];
-    if (
-      reference.startsWith("http://") ||
-      reference.startsWith("https://") ||
-      reference.startsWith("mailto:") ||
-      reference.startsWith("#") ||
-      reference.startsWith("data:")
-    ) {
-      continue;
+  if (file === "index.html") {
+    if (/noindex/i.test(html)) errors.push("Homepage must be indexable");
+    if (!html.includes('rel="canonical" href="https://grantwasil.com/"')) errors.push("Homepage canonical missing");
+    for (const required of ["I build software and help people use AI to make their lives better.", "I’m based in Colorado. I like board games, escape rooms, and murder mystery parties.", "AWS rollout automation at Duo Security / Cisco", "https://github.com/GrantWasil/crewview", "https://paintr.dev", "https://apps.apple.com/us/app/paintr-a-little-color/id6808892551", "mailto:dev@grantwasil.com", "https://github.com/GrantWasil", "https://www.linkedin.com/in/grant-wasil/", "https://x.com/GrantWasil"]) {
+      if (!html.includes(required)) errors.push(`Homepage missing approved content/link: ${required}`);
     }
-
-    const pathname = reference.split("#")[0].split("?")[0];
-    if (!pathname) continue;
-
-    const target = pathname.endsWith("/")
-      ? path.join(dist, pathname, "index.html")
-      : path.join(dist, pathname);
-
+    if (/<details\b/.test(html)) errors.push("Project evidence must be visible without disclosure controls");
+  } else if (file !== "404.html") {
+    if (!html.includes('content="0;url=/#work"')) errors.push(`${file}: missing legacy redirect`);
+    if (!html.includes('name="robots" content="noindex,follow"')) errors.push(`${file}: redirect must not be indexed`);
+  }
+  for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    const ref = match[1];
+    if (/^(?:https?:|mailto:|data:|\/\/)/.test(ref)) continue;
+    const url = new URL(ref, `https://grantwasil.com/${file.replace(/index\.html$/, "")}`);
+    const target = url.pathname.endsWith("/") ? `${url.pathname}index.html` : url.pathname;
     try {
-      await access(target);
-    } catch {
-      errors.push(`${file}: broken internal reference: ${reference}`);
-    }
+      const targetPath = path.join(dist, target);
+      await access(targetPath);
+      if (url.hash && target.endsWith(".html")) {
+        const body = await readFile(targetPath, "utf8");
+        const ids = new Set([...body.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
+        if (!ids.has(decodeURIComponent(url.hash.slice(1)))) errors.push(`${file}: missing anchor ${ref}`);
+      }
+    } catch { errors.push(`${file}: broken local reference ${ref}`); }
   }
 }
-
-if (errors.length > 0) {
-  console.error(errors.join("\n"));
-  process.exit(1);
+for (const file of relativeFiles.filter(file => file.endsWith(".css"))) {
+  const css = await readFile(path.join(dist, file), "utf8");
+  for (const match of css.matchAll(/url\(["']?([^)'"\s]+)["']?\)/g)) {
+    if (/^(data:|https?:)/.test(match[1])) continue;
+    const target = match[1].startsWith("/") ? path.join(dist, match[1]) : path.resolve(dist, path.dirname(file), match[1]);
+    try { await access(target); } catch { errors.push(`${file}: missing font/asset ${match[1]}`); }
+  }
 }
-
-console.log(`Verified ${htmlFiles.length} HTML pages and their internal references.`);
+if (relativeFiles.includes("sitemap-0.xml")) {
+  const sitemap = await readFile(path.join(dist, "sitemap-0.xml"), "utf8");
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  if (urls.length !== 1 || urls[0] !== "https://grantwasil.com/") errors.push("Sitemap must contain only the approved homepage");
+}
+if (errors.length) { console.error([...new Set(errors)].join("\n")); process.exit(1); }
+console.log(`Verified ${pages.length} HTML pages, approved homepage, legacy redirects, local links/fonts, homepage-only sitemap, and ${relativeFiles.length}-file deployment allowlist.`);
