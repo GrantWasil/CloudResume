@@ -18,8 +18,9 @@ import "@fontsource-variable/public-sans/wght.css";
   <body>
     <main>
       <header class="identity"><span class="logo" aria-hidden="true"></span><h1>Grant Wasil</h1></header>
-      <p>I build software and help people use AI to make their lives better.</p>
-      <p>At Gary Community Ventures, that means listening to what people are trying to do, experimenting with models, and building tools or helping them find a better way to work. I also run demos and office hours where we try things together. Before Gary, I was a site reliability engineer at Duo Security / Cisco.</p>
+      <p class="lead">I build software and help people use AI to make their lives better.</p>
+      <p>At Gary Community Ventures, I work with people to figure out where AI can genuinely help. Sometimes that means building a tool. Sometimes it means rethinking a workflow or sitting down together to try something out. I do the engineering and the coaching, and I run demos and office hours where people can bring their own questions.</p>
+      <p>Before Gary, I was a site reliability engineer at Duo Security / Cisco.</p>
       <nav aria-label="Contact and profiles">
         <a href="mailto:dev@grantwasil.com">Email</a>
         <a href="https://github.com/GrantWasil">GitHub</a>
@@ -30,9 +31,24 @@ import "@fontsource-variable/public-sans/wght.css";
       <section aria-labelledby="work">
         <h2 id="work">Some work</h2>
         <article>
-          <h3><a href="https://paintr.dev">paintr</a></h3>
-          <p>An iPhone and iPad app I built that turns your own images into paint-by-number puzzles. It started with my wife’s love of paint-by-number, and it’s made for taking your time with a painting.</p>
-          <p class="links"><a href="https://apps.apple.com/us/app/paintr-a-little-color/id6808892551">App Store</a> · <a href="https://paintr.dev">Website</a></p>
+          <div class="paintr-layout">
+            <div class="paintr-story">
+              <h3><a href="https://paintr.dev">paintr</a></h3>
+              <p>An iPhone and iPad app that turns your own photos into paint-by-number puzzles.</p>
+              <p>I built paintr for my wife, who loves settling into long, detailed painting sessions. That shaped the app: choose how much detail you want, take your time, and come back to a painting over several evenings.</p>
+              <p>Photos are converted on your device. You can also share a puzzle with someone so they can paint their own copy, with the option to keep the finished picture a surprise.</p>
+              <p class="links"><a href="https://apps.apple.com/us/app/paintr-a-little-color/id6808892551">App Store</a> · <a href="https://paintr.dev">Website</a></p>
+            </div>
+            <details id="paintr-screenshot" class="painting-disclosure" open>
+              <summary><span class="when-closed">View screenshot</span><span class="when-open">Hide screenshot</span></summary>
+              <a class="painting-link" href="/assets/paintr-iphone-painting.webp" aria-label="View full-size screenshot of paintr on iPhone">
+              <figure class="painting">
+                <img src="/assets/paintr-iphone-painting.webp" width="1206" height="2622" loading="lazy" decoding="async" alt="paintr on iPhone showing The sunniest seat, a partly painted orange cat, outlined unpainted regions, and numbered color pots." />
+                <figcaption>A painting in progress in paintr on iPhone.<span class="full-size-label">View full-size</span></figcaption>
+              </figure>
+              </a>
+            </details>
+          </div>
         </article>
         <article>
           <h3><a href="https://github.com/GrantWasil/VideoPaste">VideoPaste</a></h3>
@@ -48,34 +64,92 @@ import "@fontsource-variable/public-sans/wght.css";
         </article>
       </section>
 
-      <p class="personal">I’m based in Colorado. I like board games, escape rooms, and murder mystery parties.</p>
+      <p class="personal">I’m based in Colorado. Outside of work, I’m usually bringing people together around a game, an escape room, or a murder mystery party. I like creating things people can participate in, whether that’s an app, a workshop, or a slightly overambitious game night.</p>
+      <p class="contact"><a href="mailto:dev@grantwasil.com">Email</a></p>
     </main>
+    <script is:inline>
+      (() => {
+        const disclosure = document.getElementById("paintr-screenshot");
+        const trigger = disclosure.querySelector("summary");
+        const mobile = window.matchMedia("(max-width: 600px)");
+        const imageLink = document.querySelector(".painting-link");
+        const savedPainting = history.state?.paintrScreenshot;
+        const returningToPainting = savedPainting && performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+        let mobileOpen = returningToPainting ? savedPainting.open : false;
+        let wasMobile = mobile.matches;
+        const applyLayout = () => {
+          if (wasMobile && !mobile.matches) mobileOpen = disclosure.open;
+          disclosure.open = mobile.matches ? mobileOpen : true;
+          if (!mobile.matches && document.activeElement === trigger) {
+            document.querySelector(".paintr-story h3 a").focus({ preventScroll: true });
+          }
+          wasMobile = mobile.matches;
+        };
+        disclosure.addEventListener("toggle", () => {
+          if (wasMobile && mobile.matches) mobileOpen = disclosure.open;
+        });
+        mobile.addEventListener("change", applyLayout);
+        imageLink.addEventListener("click", (event) => {
+          if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+            history.replaceState({ ...history.state, paintrScreenshot: { open: disclosure.open } }, "");
+          }
+        });
+        window.addEventListener("pageshow", (event) => {
+          if ((event.persisted || returningToPainting) && history.state?.paintrScreenshot) {
+            imageLink.focus({ preventScroll: true });
+            const restoredState = { ...history.state };
+            delete restoredState.paintrScreenshot;
+            history.replaceState(restoredState, "");
+          }
+        });
+        applyLayout();
+      })();
+    </script>
   </body>
 </html>
 <style>
+  :global(:root) { color-scheme: light dark; --page: #fff; --ink: #252525; --secondary: #505050; --link: #245399; --link-hover: #153466; --selection: #dce8fa; }
   :global(*) { box-sizing: border-box; }
-  :global(body) { margin: 0; background: #fff; color: #252525; font-family: "Public Sans Variable", Arial, sans-serif; font-size: 16px; line-height: 1.65; }
+  :global(body) { margin: 0; background: var(--page); color: var(--ink); font-family: "Public Sans Variable", Arial, sans-serif; font-size: 16px; line-height: 1.65; }
+  :global(::selection) { background: var(--selection); color: var(--ink); }
   main { max-width: 690px; margin: 0 auto; padding: 64px 28px 72px; }
   .identity { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
   .logo { display: block; width: 60px; height: 36px; flex: 0 0 60px; background-color: currentColor; -webkit-mask: url("/gwlogo.png") -29px -23px / 112px auto no-repeat; mask: url("/gwlogo.png") -29px -23px / 112px auto no-repeat; }
   h1 { margin: 0; font-size: 28px; line-height: 1.25; font-weight: 650; letter-spacing: -.035em; }
-  h2 { margin: 38px 0 20px; font-size: 18px; font-weight: 650; line-height: 1.4; }
-  h3 { margin: 0 0 5px; font-size: 16px; font-weight: 650; line-height: 1.5; }
+  h2 { margin: 32px 0 16px; font-size: 20px; font-weight: 650; line-height: 1.4; }
+  h3 { display: flex; align-items: center; min-height: 44px; margin: 0 0 5px; font-size: 17px; font-weight: 650; line-height: 1.5; }
   p { margin: 0 0 16px; }
-  a { color: #245399; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  a:hover { color: #153466; }
-  a:focus-visible { outline: 2px solid #245399; outline-offset: 4px; border-radius: 1px; }
+  .lead { margin-bottom: 24px; font-size: 18px; line-height: 1.6; }
+  a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--link-hover); }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; border-radius: 1px; }
   nav { display: flex; flex-wrap: wrap; column-gap: 18px; row-gap: 8px; }
+  nav a, h3 a, .links a, .contact a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; }
   article + article { margin-top: 26px; }
   article p { margin-bottom: 8px; }
+  .paintr-layout { display: grid; grid-template-columns: minmax(0, 1fr) 180px; gap: 28px; align-items: start; }
+  .paintr-story { min-width: 0; }
+  .paintr-story p { margin-bottom: 16px; }
+  .paintr-story .links { margin-bottom: 0; }
+  .painting-disclosure > summary { display: none; color: var(--link); cursor: pointer; min-height: 44px; line-height: 44px; list-style-position: inside; -webkit-tap-highlight-color: transparent; }
+  .painting-disclosure > summary:hover { color: var(--link-hover); }
+  .painting-disclosure > summary:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; border-radius: 1px; }
+  .painting-disclosure > summary span { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .painting-disclosure .when-open, .painting-disclosure[open] .when-closed { display: none; }
+  .painting-disclosure[open] .when-open { display: inline; }
+  .painting { width: 100%; max-width: 300px; margin: 0; }
+  .painting-link { display: block; width: 100%; max-width: 300px; color: inherit; text-decoration: none; }
+  .painting-link:hover { color: inherit; }
+  .full-size-label { display: block; color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+  .painting-link:hover .full-size-label { color: var(--link-hover); }
+  .painting img { display: block; width: 100%; height: auto; border-radius: 4px; }
+  .painting figcaption { margin-top: 8px; font-size: 14px; color: var(--secondary); }
   .links { font-size: 14px; }
-  .personal { margin-top: 36px; color: #505050; }
+  .personal { margin-top: 36px; color: var(--secondary); }
+  .contact { margin-bottom: 0; }
   @media (prefers-color-scheme: dark) {
-    :global(body) { background: #181818; color: #fff; }
-    a { color: #9bc2ff; }
-    a:hover { color: #c9deff; }
-    a:focus-visible { outline-color: #9bc2ff; }
-    .personal { color: #d6d6d6; }
+    :global(:root) { --page: #181818; --ink: #fff; --secondary: #d6d6d6; --link: #9bc2ff; --link-hover: #c9deff; --selection: #345078; }
   }
+  @media (max-width: 600px) { .paintr-layout { grid-template-columns: minmax(0, 1fr); gap: 20px; } .painting-link { margin-inline: auto; } .painting-disclosure > summary { display: list-item; } .painting-disclosure[open] .painting-link { margin-top: 16px; } }
   @media (max-width: 520px) { main { padding: 36px 22px 48px; } }
 </style>
